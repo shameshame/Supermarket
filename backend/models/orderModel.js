@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const { ObjectId } = require("mongodb")
 const Product = require('../models/productModel')
-const OrderItem = require('../models/orderItem')
+const OrderItem = require('../models/itemModel')
 const validator = require('validator');
 
 
@@ -40,9 +40,9 @@ orderSchema.statics.allItemsInStock=function(cart){
 }
 
  
-orderSchema.statics.loadCartItems=async function(cart,orderId){
-    cart.forEach(item=>await OrderItem.create(...stam,orderId)) // yet to complete
-}
+// orderSchema.statics.loadCartItems=async function(cart,orderId){
+//     cart.forEach(item=>await OrderItem.create(...stam,orderId)) // yet to complete
+// }
 
 
 

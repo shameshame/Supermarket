@@ -8,4 +8,7 @@ const {
 const { protect } = require('../middleware/authMiddleware')
 
 router.post('/',protect, createOrder)
-router.get('/me', protect, getMe)
+router.get('/me', protect, getMyOrders)
+
+
+module.exports = router

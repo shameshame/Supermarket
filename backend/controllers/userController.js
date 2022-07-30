@@ -89,7 +89,7 @@ const getMe = asyncHandler(async (req, res) => {
 
 
 
-const getMyOrders=asyncHandler(async)
+// const getMyOrders=asyncHandler(async)
 
 // Generate JWT
 const generateToken = (id) => {
