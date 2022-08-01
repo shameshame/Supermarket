@@ -1,22 +1,15 @@
-import {useState} from "react"
 import Select from '@mui/material/Select'
 import  MenuItem  from "@mui/material/MenuItem";
 
 
 function DropdownMenu(props) {
-    const {options}=props
+    const {options,handleChange,currentValue}=props
 
-    const [currentValue, setCurrentValue] = useState('');
-    
-    const handleChange = (event) => {
-        setCurrentValue(event.target.value);
-      };
-    
     return (
         <Select
-           labelId="demo-simple-select-label"
+           name={props.name}
            id="demo-simple-select"
-           value={currentValue}
+           value={currentValue || ''}
            label="Choose option"
            onChange={handleChange}
         >

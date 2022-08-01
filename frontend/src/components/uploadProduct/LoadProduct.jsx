@@ -22,8 +22,9 @@ function LoadProduct(props) {
     const handleSubmit = async (event) => {
         event.preventDefault()
         let reader = new FileReader();
+        const filename = image.data.name.split('.')[0];
         reader.readAsDataURL(image.data);
-        reader.onloadend = ()=>  setForm({...form,file:reader.result})
+        reader.onloadend = ()=> setForm({...form, file:reader.result,filename})
 
         const response = 
               await axios.post('http://localhost:5000/api/inventory/new_product',form)
@@ -32,9 +33,6 @@ function LoadProduct(props) {
             setStatus(response.statusText)
             console.log(response.statusText)
         }
-        
-       
-       
     }
 
      const handleFileChange = (event) => {
@@ -42,12 +40,11 @@ function LoadProduct(props) {
           preview: URL.createObjectURL(event.target.files[0]),
           data: event.target.files[0],
         }
-      
         setImage(img)
     }
 
     const handleFormChange= (event) => {
-       if(event.target.name!=="uploaded-photo") 
+       if(event.target.name !=="uploaded-photo") 
          setForm({...form,[event.target.name]:event.target.value})
     }
 
@@ -65,18 +62,15 @@ function LoadProduct(props) {
                     <AddIcon /> Upload photo
                 </Fab>
                </label>            
-               
-               
-               
                 <TextField name="description" label="Description" />
                 <TextField name="brand" label="Brand"/>
-                <DropdownMenu options={categories}/>
+                <DropdownMenu currentValue={form.category} handleChange={handleFormChange} name="category" options={categories}/>
                 <TextField  type="number" label="Quantity" name="quantity"/>
                 <TextField type="number" onChange={setPrice}  name="price" label="Price"/>
                 <Button onClick={handleSubmit}>Submit</Button>
                 
               </form>
-              {console.log(form)}
+              
               
             </Box>
         
