@@ -1,1 +1,1 @@
-export const categories= ["Dairy","Meat & Fish","Vegetables & fruits","Bread & bakery","Beverages","Snacks"]
+export const categories= ["Dairy","Meat and Fish","Vegetables and fruits","Bread and bakery","Beverages","Snacks"]
