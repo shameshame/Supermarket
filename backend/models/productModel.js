@@ -6,12 +6,11 @@ const productSchema = mongoose.Schema({
     description:{
         type:String,
         required:[true,"Please add a description"],
-        
     },
 
     brand:{
         type:String,
-        required:[true,"Please add a description"]
+        required:[true,"Please add a company name"]
     },
     price:{
         type:Number,
@@ -28,6 +27,8 @@ const productSchema = mongoose.Schema({
     },
 
     quantity:{type:Number ,default:1},
+
+    itemsSold:{type:Number,default:0}
 
     
 })

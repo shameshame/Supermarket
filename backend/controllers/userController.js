@@ -70,12 +70,13 @@ const loginUser = asyncHandler(async (req, res) => {
 
     const user = await User.findOne({ email })
     await invalidLoginHandler(res,user,password)
+    res.cookie('access_token',generateToken(user._id),{ maxAge: 2 * 60 * 60 * 1000, httpOnly: true })
 
     res.json({
       _id: user.id,
       name: user.name,
       email: user.email,
-      token: generateToken(user._id),
+      // token: generateToken(user._id),
     })
    
 })

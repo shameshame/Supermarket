@@ -3,16 +3,14 @@ const asyncHandler = require('express-async-handler')
 const Product = require('../models/productModel')
 
 const addNewProduct = asyncHandler(async(req,res)=>{
-    const {file,filename,brand,description,category,quantity,price}=req.body
-    
-    
+    const {file,filename,...rest}=req.body
     const response  = await  cloudinary.v2.uploader.upload(file, {
         public_id:filename,
-        overwrite:false
+        overwrite:false,
+        
     });
 
-    let created= await Product.create({description,brand,category,price,quantity,
-                                       image:response.secure_url})
+    let created= await Product.create({...rest,image:response.secure_url})
     created ? res.status(201).send() : res.status(400).send(error)
 })
 
@@ -23,8 +21,8 @@ const fetchProductsByQuery = asyncHandler(async (req, res)=>{
    const sort={}
    
    if(sortBy){
-     const parts = req.query.sortBy.split(':')
-     sort[parts[0]] = parts[1].toLowerCase()==="desc"?-1:1
+      const parts = req.query.sortBy.split('_')
+      sort[parts[0]] = parts[1].toLowerCase()==="desc"?-1:1
    }
    
    let productsSubset= await Product.find(rest,null,{sort,limit})

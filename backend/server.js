@@ -1,6 +1,7 @@
 const express = require("express")
 const connectDB = require('./config/db')
 const dotenv = require('dotenv').config();
+const cookieParser = require("cookie-parser")
 const colors=require("colors")
 const cors=require("cors")
 const PORT=process.env.PORT || 5000
@@ -12,6 +13,7 @@ const app=express()
 app.use(express.json({limit: '200kb'}))
 app.use(express.urlencoded({extended:false,limit: '200kb'}))
 app.use(cors())
+app.use(cookieParser())
 
 
 

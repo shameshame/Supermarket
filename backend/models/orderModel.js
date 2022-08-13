@@ -8,8 +8,6 @@ const validator = require('validator');
 
 
 const orderSchema = mongoose.Schema({
-
-   
     owner:{
         type:ObjectId, //mongoose.Schema.Type.ObjectID
         required:true,
@@ -22,8 +20,6 @@ const orderSchema = mongoose.Schema({
     },
 
     status:{type:String,enum:["pending","closed"]},
-
-   
 },{
     timestamps: true
 })
@@ -40,9 +36,12 @@ orderSchema.statics.allItemsInStock=function(cart){
 }
 
  
-// orderSchema.statics.loadCartItems=async function(cart,orderId){
-//     cart.forEach(item=>await OrderItem.create(...stam,orderId)) // yet to complete
-// }
+orderSchema.statics.loadCartItems=async function(cart,orderId){
+    
+    await Promise.all(cart.map(async (item) => {
+        await OrderItem.create(...item,orderId)
+    }));
+}
 
 
 

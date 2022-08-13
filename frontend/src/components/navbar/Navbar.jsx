@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 import navbar from "./navbar.style";
@@ -37,6 +38,9 @@ function Navbar(props) {
             <IconButton>
                 <AccountCircleIcon/>
                 Login
+            </IconButton>
+            <IconButton>
+              <ShoppingCartIcon  color="secondary"/>
             </IconButton>
           </Toolbar>
        </AppBar>

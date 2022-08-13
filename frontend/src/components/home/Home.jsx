@@ -1,10 +1,17 @@
-import React from 'react';
+import Counter from "../counter/Counter.jsx"
+import ShopCounter from "../shopCounter/ShopCounter.jsx"
+
+
+
+
 
 function Home(props) {
+    
+    
+    
+    
     return (
-        <div>
-            Home
-        </div>
+        <><ShopCounter queryString="sortBy=itemsSold_desc&limit=20"/></>
     );
 }
 
