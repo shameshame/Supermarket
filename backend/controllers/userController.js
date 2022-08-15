@@ -57,7 +57,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user.id,
       name: user.name,
       email: user.email,
-      token: generateToken(user._id),
+      // token: generateToken(user._id),
   })
    
 })
@@ -70,14 +70,16 @@ const loginUser = asyncHandler(async (req, res) => {
 
     const user = await User.findOne({ email })
     await invalidLoginHandler(res,user,password)
+    
     res.cookie('access_token',generateToken(user._id),{ maxAge: 2 * 60 * 60 * 1000, httpOnly: true })
-
-    res.json({
-      _id: user.id,
-      name: user.name,
-      email: user.email,
-      // token: generateToken(user._id),
-    })
+       .status(200)
+       .json({
+        _id: user.id,
+        name: user.name,
+        email: user.email,
+        
+      })
+    
    
 })
 
@@ -88,19 +90,22 @@ const getMe = asyncHandler(async (req, res) => {
   res.status(200).json(req.user)
 })
 
+const logOut = (req,res)=>res.clearCookie("access_token")
+                             .status(200)
+                             .json({ message: "Successfully logged out" });
+
 
 
 // const getMyOrders=asyncHandler(async)
 
 // Generate JWT
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: '3h',
-  })
+  return jwt.sign({ id }, process.env.JWT_SECRET)
 }
 
 module.exports = {
   registerUser,
   loginUser,
   getMe,
+  logOut
 }

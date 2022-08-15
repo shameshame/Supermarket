@@ -5,11 +5,13 @@ const cookieParser = require("cookie-parser")
 const colors=require("colors")
 const cors=require("cors")
 const PORT=process.env.PORT || 5000
+const {requestMethod} = require("./middleware/requestMethod")
 
 connectDB()
 
 const app=express()
 
+app.all('*',requestMethod)
 app.use(express.json({limit: '200kb'}))
 app.use(express.urlencoded({extended:false,limit: '200kb'}))
 app.use(cors())

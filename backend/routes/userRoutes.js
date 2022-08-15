@@ -4,12 +4,17 @@ const {
   registerUser,
   loginUser,
   getMe,
+  logOut
 } = require('../controllers/userController')
-const { protect } = require('../middleware/authMiddleware')
+const { authorization } = require('../middleware/authMiddleware')
 
 router.post('/', registerUser)
 router.post('/login', loginUser)
-router.get('/me', protect, getMe)
+router.get('/logout', authorization,logOut)
+router.get('/me', authorization, getMe)
+router.trace("/stam",()=>{
+  console.log("А где бибушка малыш")
+})
 
 
 
