@@ -14,7 +14,7 @@ const app=express()
 app.all('*',requestMethod)
 app.use(express.json({limit: '200kb'}))
 app.use(express.urlencoded({extended:false,limit: '200kb'}))
-app.use(cors())
+app.use(cors({origin:true,credentials: true}))
 app.use(cookieParser())
 
 

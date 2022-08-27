@@ -8,18 +8,16 @@ const Order = require('../models/orderModel')
 
 // Error Handlers
 
-function userExistsHandler(res,user){
+function userExistsHandler(user){
    if(user){
-    res.status(400)
-    throw new Error('User already exists')
+     throw new Error('User already exists')
    }
     
 }
 
-function missingFieldHandler(res,name,email,password){
+function missingFieldHandler(name,email,password){
     if (!name || !email || !password) {
-        res.status(400)
-        throw new Error('Please fill all the fields')
+       throw new Error('Please fill all the fields')
     }
 }
 
@@ -28,17 +26,15 @@ async function hashedPassword(password){
     return await bcrypt.hash(password, salt)
 }
 
-async function invalidLoginHandler(res,user,password){
+async function invalidLoginHandler(user,password){
     if(!user || !(await bcrypt.compare(password, user.password))){
-        res.status(400)
-        throw new Error('Invalid credentials')
+       throw new Error('Invalid credentials')
     }
 }
 
-function invalidInputHandler(res,user){
+function invalidInputHandler(user){
     if(!user){
-        res.status(400)
-        throw new Error('Invalid user data')
+       throw new Error('Invalid user data')
     }
 }
 
@@ -48,17 +44,20 @@ function invalidInputHandler(res,user){
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body
   
-  missingFieldHandler(res,name,email,password)
-  userExistsHandler(res,await User.findOne({ email }))
-  const user = await User.create({name,email,password: await hashedPassword(password) })
-  invalidInputHandler(res,user)
+    try{
+      missingFieldHandler(name,email,password)
+      userExistsHandler(await User.findOne({ email }))
+      const user = await User.create({name,email,password: await hashedPassword(password) })
+      invalidInputHandler(user)
   
-  res.status(201).json({
-      _id: user.id,
-      name: user.name,
-      email: user.email,
-      // token: generateToken(user._id),
-  })
+      res.status(201).json({
+          _id: user.id,
+          name: user.name,
+          email: user.email,
+      })
+    }catch(error){
+      res.status(400).json({message:error.message})
+    }
    
 })
 
@@ -67,21 +66,19 @@ const registerUser = asyncHandler(async (req, res) => {
 // @access  Public
 const loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body
-
-    const user = await User.findOne({ email })
-    await invalidLoginHandler(res,user,password)
-    
-    res.cookie('access_token',generateToken(user._id),{ maxAge: 2 * 60 * 60 * 1000, httpOnly: true })
-       .status(200)
-       .json({
-        _id: user.id,
-        name: user.name,
-        email: user.email,
-        
-      })
-    
-   
-})
+       try{
+           const user = await User.findOne({ email })
+           await invalidLoginHandler(user,password)
+           res.cookie('access_token',generateToken(user._id),
+                      { maxAge: 2 * 60 * 60 * 1000,
+                        secure: process.env.NODE_ENV !== "development", 
+                        httpOnly: true 
+                      })
+              .status(200).json({_id: user.id,name: user.name,email: user.email,})
+       }catch(error){
+           res.status(401).json({message: error.message})
+        }
+  })
 
 // @desc    Get user data
 // @route   GET /api/users/me
@@ -96,7 +93,7 @@ const logOut = (req,res)=>res.clearCookie("access_token")
 
 
 
-// const getMyOrders=asyncHandler(async)
+
 
 // Generate JWT
 const generateToken = (id) => {

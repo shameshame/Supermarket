@@ -1,57 +1,93 @@
-import {useLocation} from "react-router-dom";
-import {useState} from "react";
-import { useForm } from 'react-hook-form';
+import {useNavigate} from "react-router-dom";
+import {useState,useEffect} from "react";
+import {FormProvider, useForm,useFormContext } from 'react-hook-form';
 import TextField from '@mui/material/TextField';
+import {toast } from 'react-toastify';
+
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import customValidationFields from "./customValidationFields.js"
+import LoadingButton from '@mui/lab/LoadingButton'
 
 function FormTemplate(props) {
     
-    const {fieldsToFill,buttonText}=props
+    const {fieldsToFill,buttonText,submitHandler,redirect,message,
+           isLoading, isSuccess, error, isError
+          }=props
     const [inputFields, setInputFields] = useState({})
+    const navigate = useNavigate();
+
     
-    
+
+    //Functions to run after loading
+    const redirectIfSuccess=()=>{
+        
+        redirect ? navigate(redirect):navigate("/");
+        toast.success(message);
+    }
+
+    const errorStack=()=>{
+        if (isError) {
+            Array.isArray(error?.data.error)
+                  ? error?.data.error.forEach((element) =>
+                     toast.error(element.message, {
+                     position: 'top-right',
+                    }))
+                  
+                  :toast.error(error?.data.message, {position: 'top-right',});
+        }
+    }
+
+    const methods=useForm();
     const {
-        register,watch,
+        watch,register,
         handleSubmit,
-        formState: { errors },
-      } = useForm();
+        reset,
+        formState: { errors,isSubmitSuccessful},
+    } =methods;
+
+    // const {register}=useFormContext()
+    useEffect(() => {
+        if (isSubmitSuccessful)  reset();
+    }, [isSubmitSuccessful]);
+
+    useEffect(() => {
+        console.log("IsSussess:",isSuccess);
+        isSuccess? redirectIfSuccess():errorStack()
+    }, [isLoading]);
+    
     
     const handleFormChange = (event) => {
        setInputFields({...inputFields,[event.target.name]:event.target.value})
     }
 
-    const onSubmit = (event)=>{
-        // event.preventDefault()
-        setInputFields([])
-    }
+    
 
     
-    return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-           {fieldsToFill?.map((field,index)=>{
-            const {name,type,label,pattern}=field
-            return <Box>
-                    <TextField key={index} type={type} label={label} 
-                               
-                     {...register(name, {required:`${name} is required`,
-                                         pattern,
-                                         validate:name==="confirm-password" ?(value)=>watch('password') === value || "Passwords don't match":undefined,
+    return ( 
+        <FormProvider {...methods}>
+          <Box component="form" onSubmit={handleSubmit(()=>submitHandler(inputFields))}>
+           {fieldsToFill?.map((field,index)=>
+           <TextField key={index} type={field.type} label={field.label} 
+                    {...register(field.name, {required:`${field.name} is required`,
+                                         pattern:field.pattern,
+                                         // Check if you  can change this line by passing useFormContext
+                                         validate:field.name==="confirm-password" 
+                                                 ?(value)=>watch('password') === value || "Passwords don't match"
+                                                 :undefined,
                                          onChange:event => handleFormChange(event)
                                         })
                      } 
-                     variant="outlined"  autoFocus={!index} error={!!errors?.[name]}
-                     helperText={errors?.[name]? errors[name].message : null} 
-                    />
-                   
-                </Box>
-            })}
-            <Button type="submit" variant="contained" color="primary" >
+                     variant="outlined"  autoFocus={!index} error={!!errors?.[field.name]}
+                     helperText={errors?.[field.name]? errors[field.name].message : null} 
+            />
+            )}
+            <LoadingButton type="submit"  loading={isLoading} variant="contained" color="primary" >
                 {buttonText}
-           </Button> 
-           
-        </form>
+           </LoadingButton> 
+          
+        </Box>
+       
+        </FormProvider>
     );
 }
 

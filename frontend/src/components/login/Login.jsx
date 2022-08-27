@@ -1,12 +1,25 @@
 import FormTemplate from "../formTemplate/FormTemplate";
 import loginFields from "./loginFields.js"
+import { useLoginUserMutation } from "../../redux/services/authApi";
+import {useLocation} from "react-router-dom"
 
 function Login(props) {
     
+    const location=useLocation();
+    const [loginUser, { isLoading, isSuccess, error, isError }] =
+    useLoginUserMutation();
     
-    return (
-        <FormTemplate buttonText="Login" fieldsToFill={loginFields}/>
-    );
+    const attributes= {
+        isLoading, isSuccess, error, isError,
+        redirect:location.state?.from.pathname || '/',
+        submitHandler:inputs=>loginUser(inputs),
+        message:"You are logged in",
+        buttonText:"Login",
+        fieldsToFill:loginFields
+     }
+    
+    
+    return (<FormTemplate {...attributes}/>);
 }
 
 export default Login;
