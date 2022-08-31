@@ -5,6 +5,13 @@ const User = require('../models/userModel')
 const Order = require('../models/orderModel')
 
 
+const accessTokenOptions = {
+                        maxAge: 2 * 60 * 60 * 1000,
+                        secure: process.env.NODE_ENV !== "development", 
+                        httpOnly: true
+}
+
+
 
 // Error Handlers
 
@@ -69,12 +76,9 @@ const loginUser = asyncHandler(async (req, res) => {
        try{
            const user = await User.findOne({ email })
            await invalidLoginHandler(user,password)
-           res.cookie('access_token',generateToken(user._id),
-                      { maxAge: 2 * 60 * 60 * 1000,
-                        secure: process.env.NODE_ENV !== "development", 
-                        httpOnly: true 
-                      })
-              .status(200).json({_id: user.id,name: user.name,email: user.email,})
+           res.cookie("logged_in",true,{...accessTokenOptions,httpOnly:false})
+           res.cookie('access_token',generateToken(user._id),accessTokenOptions)
+              .status(200).json({_id: user.id,name: user.name,email: user.email,role:user.role})
        }catch(error){
            res.status(401).json({message: error.message})
         }

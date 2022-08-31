@@ -31,9 +31,8 @@ function Navbar(props) {
                     variant="outlined"
             />
 
-<Typography  variant="h4" component={Link} to="/new_product" >
-                Add
-           </Typography>
+            
+
 
             <IconButton component={Link} to="/login">
                 <AccountCircleIcon/>

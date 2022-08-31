@@ -11,7 +11,7 @@ import LoadingButton from '@mui/lab/LoadingButton'
 function FormTemplate(props) {
     
     const {fieldsToFill,buttonText,submitHandler,redirect,message,
-           isLoading, isSuccess, error, isError
+           isLoading, isSuccess, error, isError,data,
           }=props
     const [inputFields, setInputFields] = useState({})
     const navigate = useNavigate();
@@ -20,8 +20,8 @@ function FormTemplate(props) {
 
     //Functions to run after loading
     const redirectIfSuccess=()=>{
-        
-        redirect ? navigate(redirect):navigate("/");
+       
+        redirect ? navigate(redirect):navigate(`/${data.role}`);
         toast.success(message);
     }
 

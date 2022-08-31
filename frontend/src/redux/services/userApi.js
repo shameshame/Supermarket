@@ -18,17 +18,19 @@ export const userApi = createApi({
             credentials: 'include',
           };
         },
-        // providesTags:["User"],
+        invalidatesTags:['User'],
         
         async onQueryStarted(args, { dispatch, queryFulfilled }) {
           try {
             
             const { data } = await queryFulfilled;
-            console.log(data)
             dispatch(setCredentials(data));
           } catch (error) {console.log(error.message)}
         },
+        //END OF getME
       }),
+    
+    
     }),
   });
   

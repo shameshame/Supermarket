@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit"
-import { isFulfilled } from '@reduxjs/toolkit'
+
 
 const initialState = {loggedIn:null}
 
@@ -23,5 +23,5 @@ const authSlice = createSlice({
 export const {setCredentials,logOut}=authSlice.actions
 export default authSlice.reducer
 
-export const selectCurrentUser = (root)=>root.auth.user
-export const selectCurrentToken = (root)=>root.auth.token
+export const selectCurrentUser = (state)=>state.loggedIn
+

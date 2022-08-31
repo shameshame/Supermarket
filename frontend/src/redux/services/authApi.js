@@ -9,15 +9,7 @@ export const authApi = createApi({
       baseUrl:`http://localhost:5000/api/users`
     }),
     
-    prepareHeaders: (headers, { getState }) => {
-        const token = getState().auth.token;
-        headers.set("")
-        // If we have a token set in state, let's assume that we should be passing it.
-        if (token) {
-          headers.set('authorization', `Bearer ${token}`);
-        }
-        return headers;
-    },
+     tagTypes: ['User'],
 
     endpoints:(builder)=>({
       signUp:builder.mutation({
@@ -41,13 +33,14 @@ export const authApi = createApi({
           };
         },
 
+        invalidatesTags:['User'],
+
         async onQueryStarted(args, { dispatch, queryFulfilled }) {
           try {
-            const {data}=await queryFulfilled;
-            console.log(data)
-            await dispatch(userApi.endpoints.getMe.initiate(null));//Won't work in current state
+            await queryFulfilled;
+            await dispatch(userApi.endpoints.getMe.initiate(null));
           } catch (error) {
-            console.log(error.message)
+            
           }
         },
       }),
