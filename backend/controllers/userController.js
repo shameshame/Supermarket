@@ -78,7 +78,7 @@ const loginUser = asyncHandler(async (req, res) => {
            await invalidLoginHandler(user,password)
            res.cookie("logged_in",true,{...accessTokenOptions,httpOnly:false})
            res.cookie('access_token',generateToken(user._id),accessTokenOptions)
-              .status(200).json({_id: user.id,name: user.name,email: user.email,role:user.role})
+              .status(200).json({role:user.role})
        }catch(error){
            res.status(401).json({message: error.message})
         }

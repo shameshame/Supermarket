@@ -51,7 +51,7 @@ function FormTemplate(props) {
     }, [isSubmitSuccessful]);
 
     useEffect(() => {
-        console.log("IsSussess:",isSuccess);
+        
         isSuccess? redirectIfSuccess():errorStack()
     }, [isLoading]);
     

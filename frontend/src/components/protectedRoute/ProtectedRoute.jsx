@@ -4,6 +4,7 @@ import { userApi } from '../../redux/services/userApi.js';
 
 
 function ProtectedRoute({allowedRoles}) {
+    //Check if you need logged_in cookie
     const [cookies] = useCookies(['logged_in']);
     const location = useLocation();
 
@@ -19,17 +20,15 @@ function ProtectedRoute({allowedRoles}) {
   });
 
   if (loading) {
-    return <h1>Loading....</h1>;
+    return <h1>Loading....</h1>; //Replace it with Circular Loader MUI
   }
-           //Check if you can omit an OR statement (since currentUser is checked twice)
-  return (cookies.logged_in || currentUser) &&
-    allowedRoles.includes(currentUser?.role) ? (
-    <Outlet />
-  ) : cookies.logged_in && currentUser ? (
-    <Navigate to='/unauthorized' state={{ from: location }} replace />
-  ) : (
-    <Navigate to='/login' state={{ from: location }} replace />
-  );
+           
+  return !(cookies.logged_in && currentUser) 
+         ? <Navigate to='/login' state={{ from: location }} replace />
+         :(!allowedRoles.includes(currentUser?.role) 
+            ?<Navigate to='/unauthorized' state={{ from: location }} replace />
+            :<Outlet />
+          )
 };
 
 

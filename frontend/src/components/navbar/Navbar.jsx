@@ -33,7 +33,6 @@ function Navbar(props) {
 
             
 
-
             <IconButton component={Link} to="/login">
                 <AccountCircleIcon/>
                 Login

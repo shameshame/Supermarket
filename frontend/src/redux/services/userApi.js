@@ -25,6 +25,7 @@ export const userApi = createApi({
             
             const { data } = await queryFulfilled;
             dispatch(setCredentials(data));
+            console.log(data)
           } catch (error) {console.log(error.message)}
         },
         //END OF getME
