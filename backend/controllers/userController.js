@@ -83,6 +83,20 @@ const loginUser = asyncHandler(async (req, res) => {
            res.status(401).json({message: error.message})
         }
   })
+  
+  const fetchUsersByQuery = asyncHandler(async (req, res)=>{
+    const {limit,sortBy,...rest}=req.query
+    const sort={}
+    
+    if(sortBy){
+       const parts = req.query.sortBy.split('_')
+       sort[parts[0]] = parts[1].toLowerCase()==="desc"?-1:1
+    }
+    
+    let userSubset= await User.find(rest,null,{sort,limit})
+    res.json(userSubset)
+ })
+
 
 // @desc    Get user data
 // @route   GET /api/users/me
@@ -91,9 +105,14 @@ const getMe = asyncHandler(async (req, res) => {
   res.status(200).json(req.user)
 })
 
-const logOut = (req,res)=>res.clearCookie("access_token")
+const logOut = (req,res)=>{
+  
+  res.clearCookie("logged_in")
+  return res.clearCookie("access_token")
                              .status(200)
-                             .json({ message: "Successfully logged out" });
+                             .json({ message: "Successfully logged out" })
+                            
+};
 
 
 
@@ -108,5 +127,6 @@ module.exports = {
   registerUser,
   loginUser,
   getMe,
-  logOut
+  logOut,
+  fetchUsersByQuery
 }

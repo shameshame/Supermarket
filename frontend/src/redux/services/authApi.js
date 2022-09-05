@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {userApi} from "./userApi"
+import {logOut} from "../features/auth/authSlice"
 
 console.log(process.env.REACT_APP_SERVER)
 
@@ -52,7 +53,17 @@ export const authApi = createApi({
             credentials: 'include',
           };
         },
-      }),
+        
+        async onQueryStarted(args, { dispatch, queryFulfilled }) {
+          try {
+            await queryFulfilled;
+            dispatch(logOut());
+          } catch (error) {console.log(error.message)}
+        }
+      
+      
+      })//logoutUser
+      ,
     
     })//ENDPOINTS
 

@@ -60,9 +60,6 @@ function FormTemplate(props) {
        setInputFields({...inputFields,[event.target.name]:event.target.value})
     }
 
-    
-
-    
     return ( 
         <FormProvider {...methods}>
           <Box component="form" onSubmit={handleSubmit(()=>submitHandler(inputFields))}>

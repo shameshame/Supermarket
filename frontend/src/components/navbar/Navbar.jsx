@@ -9,6 +9,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
+import ProfileNavTemplate from "../profileTemplate/ProfileNavTemplate";
 import navbar from "./navbar.style";
 
 function Navbar(props) {
@@ -30,13 +31,7 @@ function Navbar(props) {
                     }}
                     variant="outlined"
             />
-
-            
-
-            <IconButton component={Link} to="/login">
-                <AccountCircleIcon/>
-                Login
-            </IconButton>
+          <ProfileNavTemplate />
             <IconButton>
               <ShoppingCartIcon  color="secondary"/>
             </IconButton>
