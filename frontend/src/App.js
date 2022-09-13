@@ -1,6 +1,5 @@
 import {BrowserRouter,Routes,Route} from "react-router-dom";
 import Navbar from './components/navbar/Navbar'
-import Menu from "./components/Menu"
 import LoadProduct from "./components/uploadProduct/LoadProduct";
 import Home from "./components/home/Home"
 import SignUp from "./components/signup/SignUp.jsx"
@@ -14,7 +13,6 @@ import Unauthorized from "./components/unauthorizedPage/Unauthorized.jsx"
 function App() {
   return (<BrowserRouter>
              <Navbar/>
-             <Menu/>
              <Routes>
                 <Route path="/">
                       {/* Public routes */}

@@ -5,6 +5,7 @@ import Counter from "../counter/Counter.jsx"
 import {useEffect,useState} from "react"
 import axios from "axios"
 import Grid from '@mui/material/Grid'
+import InventoryItem from "../item/InventoryItem.jsx"
 import shopCounter from "./shopCounter.style"
 
 function ShopCounter(props) {
@@ -25,9 +26,7 @@ function ShopCounter(props) {
     
     return(<Grid container spacing={2}>{products?.map(product=>
                                <Grid item >
-                                    <Product  {...product} />
-                                    <Counter/> 
-                                    <Button color="secondary">ADD TO CART</Button>
+                               <InventoryItem {...product}/>
                                 </Grid> )}
            </Grid>
     );

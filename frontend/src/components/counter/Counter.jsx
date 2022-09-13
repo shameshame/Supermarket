@@ -2,10 +2,11 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField'
-import useCounter from "../../customHooks/useCounter"
+
+
 
 function Counter(props) {
-    const [count, increment, decrement]=useCounter(1,1)
+    const {count, increment, decrement}=props
     
     return (
         <Stack direction="row" spacing={1}>

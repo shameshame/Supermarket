@@ -3,7 +3,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
 import Menu from '@mui/material/Menu'
 import ProfileMenuItem from '../profileMenuItem/ProfileMenuItem.jsx';
-import {useState,useEffect} from "react"
+import {useState} from "react"
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux"
 import {profilePaper} from "./profileTemplate.style"
