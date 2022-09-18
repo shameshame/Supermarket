@@ -26,16 +26,19 @@ const productSchema = mongoose.Schema({
         required:[true,"Category is required"]
     },
 
-    quantity:{type:Number ,default:1},
+    quantity:{
+     type:Number,
+     min:[0,"Number of items can't be negative"],
+     default:1
+    },
 
     itemsSold:{type:Number,default:0}
 
     
 })
 
-productSchema.statics.enoughItemsInStock = async function(frontData){
-    let itemsInStock = await Product.find({description:frontData.description,brand:frontData.brand}).select("quantity")
-    return  itemsInStock>=frontData.quantity
-}
 
-module.exports=mongoose.model("Product",productSchema)
+
+const Product = mongoose.model("Product",productSchema)
+
+module.exports=Product

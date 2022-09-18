@@ -12,7 +12,7 @@ function ShopCounter(props) {
     const {queryString}=props
     const [products,setProducts]= useState()
     
-
+    //Replace it with RTK api call
     const putProductsOnTheCounter = async ()=>{
         const response= await axios.get(`http://localhost:5000/api/inventory/search?${queryString}`)
         setProducts(response.data)

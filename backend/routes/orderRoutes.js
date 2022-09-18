@@ -7,7 +7,7 @@ const {
 } = require("../controllers/orderController")
 const { authorization } = require('../middleware/authMiddleware')
 
-router.post('/',authorization, createOrder)
+router.post('/new_order',authorization, createOrder)
 router.get('/me', authorization, getMyOrders)
 
 

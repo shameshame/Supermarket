@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { authApi } from './services/authApi';
 import { userApi } from './services/userApi';
+import { cartApi } from './services/cartApi';
 import { cartReducer } from "./features/cart/cartSlice";
 import authReducer from './features/auth/authSlice';
 import { productApi } from './services/productApi';
@@ -28,6 +29,7 @@ export const store = configureStore({
     //API reducers
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
+    [cartApi.reducerPath]: cartApi.reducer,
     
     //Reducers to update state
     user: authReducer,
@@ -39,7 +41,7 @@ export const store = configureStore({
                  ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
                 }
                })
-              .concat([authApi.middleware, userApi.middleware,productApi.middleware]),
+              .concat([authApi.middleware, userApi.middleware,productApi.middleware,cartApi.middleware]),
 });
 
 export const persistor = persistStore(store)

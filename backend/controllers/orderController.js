@@ -1,22 +1,31 @@
 const asyncHandler = require('express-async-handler')
 const mongoose = require('mongoose')
-
 const Order = require('../models/orderModel')
 
 
 const createOrder=asyncHandler(async(req,res)=>{
    
-
    //Since we save cart items BEFORE insertion of order, we need to generate orderId here
    //(we pass it to loadCartItems and then use for creation of the order)
-   //(CHECK IF WE REALLY NEED TO DO IT THIS WAY !!!!)
    const orderId=new mongoose.Types.ObjectId();
-   await Order.allItemsInStock(req.cart)
-   await Order.loadCartItems(req.cart,orderId)
+   const {cart,totalPrice,totalItems}=req.body
    
-   const order=await Order.create({owner : req.user._id, _id:orderId}).
-   order? res.status(201).json({message:"Order has been sent successfully"})
-         :res.status(400).json({error:"Bad request - order sending failed"})
+   const session = await Order.startSession();
+   
+   try{
+      await session.withTransaction(async()=>{
+        Order.verifyData(cart,totalItems,totalPrice)
+        await Order.enoughItemsInStock(cart,session)
+        await Order.loadCartItems(cart,orderId,session)
+        await Order.create([{owner : req.user._id, _id:orderId,totalPrice}],{session})
+        
+        res.status(201).json({message:"Order has been sent successfully"}) 
+      })
+   }catch (error) {
+     res.status(500).json({message: error.message})
+   }finally{
+     session.endSession()
+   }
 })
 
 
