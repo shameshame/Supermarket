@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const mongoose = require('mongoose')
 const Order = require('../models/orderModel')
+const OrderItem = require('../models/itemModel')
 
 
 const createOrder=asyncHandler(async(req,res)=>{
@@ -17,8 +18,7 @@ const createOrder=asyncHandler(async(req,res)=>{
         Order.verifyData(cart,totalItems,totalPrice)
         await Order.enoughItemsInStock(cart,session)
         await Order.loadCartItems(cart,orderId,session)
-        await Order.create([{owner : req.user._id, _id:orderId,totalPrice}],{session})
-        
+        await Order.create([{owner : req.user._id,_id:orderId,totalPrice}],{session})
         res.status(201).json({message:"Order has been sent successfully"}) 
       })
    }catch (error) {
@@ -33,17 +33,20 @@ const createOrder=asyncHandler(async(req,res)=>{
 const getMyOrders=asyncHandler(async(req,res)=>{
     match={}
     match.status=req.query.status
-    
+
     await req.user.populate({path: "orders",
+        populate:{
+            path: 'products',
+            model: OrderItem,
+            select:"description quantity price orderId"
+        },
         match,
         options:{
             limit:parseInt(req.query.limit),
             sort:{createdAt:"desc"}
         }
     })
-
-    await Order.find({owner:req.user._id}).populate({path:"products",select:"description quantity price"})
-    return req.user.orders
+    res.status(200).json(req.user.orders)
 })
 
 module.exports={

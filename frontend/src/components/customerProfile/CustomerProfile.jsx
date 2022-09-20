@@ -1,4 +1,4 @@
-
+import MyOrders from "../myOrders/MyOrders";
 
 function CustomerProfile(props) {
     return (<>
@@ -9,6 +9,8 @@ function CustomerProfile(props) {
                 My orders (table - each line includes order status , )
             
             */}
+
+            <MyOrders/>
            
         </>
     );

@@ -4,11 +4,11 @@ import LoadProduct from "./components/uploadProduct/LoadProduct";
 import Home from "./components/home/Home"
 import SignUp from "./components/signup/SignUp.jsx"
 import Login from "./components/login/Login.jsx"
-import Cart from "./components/cart/Cart.jsx"
 import ProtectedRoute from "./components/protectedRoute/ProtectedRoute.jsx"
 import CustomerProfile from "./components/customerProfile/CustomerProfile.jsx"
 import AdminProfile from "./components/adminProfile/AdminProfile.jsx"
 import Unauthorized from "./components/unauthorizedPage/Unauthorized.jsx"
+import MyOrders from "./components/myOrders/MyOrders.jsx"
 
 function App() {
   return (<BrowserRouter>
@@ -21,9 +21,12 @@ function App() {
                   <Route path="/register" element={<SignUp />}/>
                   <Route path="/unauthorized" element = {<Unauthorized/>}/>
                       {/* Protected routes */}
-                  <Route element={<ProtectedRoute allowedRoles={["Customer","Admin"]}/>}>
-                    <Route path="/customer" element={<CustomerProfile/>}/>
+                  <Route path="/customer"  element={<ProtectedRoute allowedRoles={["Customer","Admin"]}/>}>
+                    <Route path="/customer"  element={<CustomerProfile/>}/>
+                    <Route path="my_orders" element={<MyOrders/>}/>
                   </Route>
+                  
+                  
                   <Route element={<ProtectedRoute allowedRoles={["Admin"]}/>}>
                     <Route path="/admin" element={<AdminProfile/>}/>
                   </Route>

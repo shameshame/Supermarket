@@ -19,10 +19,13 @@ const orderSchema = mongoose.Schema({
 
     status:{type:String,enum:["pending","closed"]},
 },{
-    timestamps: true
+    timestamps: true,
+    toJSON:{virtuals:true},
+    toObject:{virtuals:true}
 })
 
 orderSchema.virtual("products",{
+    
     ref: "OrderItem",
     localField:"_id",
     foreignField: "orderId"
@@ -59,6 +62,8 @@ orderSchema.statics.attemptToUpdateStore = async function(item,session){
 
 
 orderSchema.statics.loadCartItems=async function(cart,orderId,session){
+    
+    
     await Promise.all(cart.map(async (item) => {
         const {quantity,price,description}=item
         await OrderItem.create([{quantity,price,description,orderId}],{session})

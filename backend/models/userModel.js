@@ -25,6 +25,9 @@ const userSchema=mongoose.Schema({
           enum: ['Admin', 'Customer','Storekeeper'],
           default:"Customer"
     }
+},{
+    toJSON:{virtuals:true},
+    toObject:{virtuals:true}
 })
 
 userSchema.statics.findByCredentials = async (email,password)=>{
@@ -41,5 +44,6 @@ userSchema.virtual("orders",{
     localField:"_id",
     foreignField: "owner"
 })
+
 
 module.exports = mongoose.model('User', userSchema)

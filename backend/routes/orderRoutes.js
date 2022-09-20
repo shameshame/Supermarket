@@ -8,7 +8,7 @@ const {
 const { authorization } = require('../middleware/authMiddleware')
 
 router.post('/new_order',authorization, createOrder)
-router.get('/me', authorization, getMyOrders)
+router.get('/my_orders', authorization, getMyOrders)
 
 
 module.exports = router

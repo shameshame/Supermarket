@@ -18,9 +18,26 @@ export const cartApi = createApi({
              } 
             
            }
+        }),
+     
+        getMyOrders:builder.query({
+             query(){
+                return{
+                   url: 'my_orders',
+                   method: 'GET',
+                   credentials: 'include'
+                } 
+             },
 
+             async onQueryStarted(args, { dispatch, queryFulfilled }) {
+              try {
+                const { data } = await queryFulfilled;
+                console.log("My orders :",data)
+              } catch (error) {console.log(error.message)}
+            },
         })
-    })
+     
+      })
 
 
 
@@ -28,5 +45,6 @@ export const cartApi = createApi({
 }) //END OF cartApi
 
 export const {
-    useSendOrderMutation
+    useSendOrderMutation,
+    useGetMyOrdersQuery
 }=cartApi
