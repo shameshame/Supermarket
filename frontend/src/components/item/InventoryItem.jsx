@@ -5,20 +5,27 @@ import  Button  from "@mui/material/Button"
 import { useDispatch } from 'react-redux';
 import useCounter from "../../customHooks/useCounter"
 import {addToCart} from '../../redux/features/cart/cartSlice'; 
+import inventoryItemStyle from "./inventoryItem.style.js";
+import amber from "@mui/material/colors/amber"
+import {useState} from "react"
+import {createTheme,ThemeProvider} from "@mui/material/styles"
+
+
 
 function InventoryItem(props) {
     const [count, increment, decrement]=useCounter(1,1)
     const dispatch=useDispatch() 
     const {_id,description,brand,price,image,category,itemsSold}=props
     const propsForCart= {_id,description,brand,price}
-   
+   const [hover,setHover]=useState(false)
     return (
-        <Box>
+        <Box sx={inventoryItemStyle.general} onMouseOver={()=>setHover(true)} onMouseOut={()=>setHover(false)} border={1} >
            <Product {...props}/>
-           <Counter count={count} decrement={decrement} increment={increment}/> 
-           <Button onClick={()=>dispatch(addToCart({quantity:count,...propsForCart}))} color="secondary">
-                        ADD TO CART
-           </Button>
+           {hover && 
+           <Box sx={{display:"flex",justifyContent:"space-between"}} > 
+            <Counter count={count} decrement={decrement} increment={increment}/> 
+            <Button sx={{px:3}} variant="contained" onClick={()=>dispatch(addToCart({quantity:count,...propsForCart}))} color="secondary">ADD</Button>
+           </Box>}
            
         </Box>
     );

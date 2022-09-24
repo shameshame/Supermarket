@@ -1,7 +1,3 @@
-import Box from "@mui/material/Box"
-import  Button  from "@mui/material/Button"
-import Product from "../product/Product.jsx"
-import Counter from "../counter/Counter.jsx"
 import {useEffect,useState} from "react"
 import axios from "axios"
 import Grid from '@mui/material/Grid'
@@ -24,8 +20,8 @@ function ShopCounter(props) {
     },[])
 
     
-    return(<Grid container spacing={2}>{products?.map(product=>
-                               <Grid item >
+    return(<Grid container spacing={3}>{products?.map(product=>
+                               <Grid item md={4}>
                                <InventoryItem {...product}/>
                                 </Grid> )}
            </Grid>

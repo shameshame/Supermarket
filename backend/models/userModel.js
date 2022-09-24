@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
+const Order = require( './orderModel')
 
 
 const userSchema=mongoose.Schema({
@@ -43,6 +44,19 @@ userSchema.virtual("orders",{
     ref: "Order",
     localField:"_id",
     foreignField: "owner"
+})
+
+//Add middleware for password changing
+
+
+
+
+//Middleware for cascade deletion (delete all user's orders before deletion of the user himself)
+userSchema.pre("remove",async function(next){
+    const user =this;
+    await Order.deleteMany({owner: user._id})
+
+    next();
 })
 
 

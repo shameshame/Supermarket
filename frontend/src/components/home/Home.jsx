@@ -15,12 +15,13 @@ function Home(props) {
     
     return (
         <Grid  container>
-           <Grid item md={4}>
-              <Cart/>
-           </Grid>
            <Grid item md={8}>
               <ShopCounter queryString="sortBy=itemsSold_desc&limit=20"/>
            </Grid>
+           <Grid item md={4}>
+              <Cart/>
+           </Grid>
+           
         </Grid>
     );
 }

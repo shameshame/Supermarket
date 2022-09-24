@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const { ObjectId } = require("mongodb")
 const Product = require('../models/productModel')
 const OrderItem = require('../models/itemModel')
-const validator = require('validator');
+
 
 
 const orderSchema = mongoose.Schema({
@@ -57,18 +57,21 @@ orderSchema.statics.attemptToUpdateStore = async function(item,session){
     let productToUpdate = await Product.findOne({_id:item._id})
     productToUpdate.quantity-=item.quantity;
     await productToUpdate.save({session})
-    
 }
 
-
 orderSchema.statics.loadCartItems=async function(cart,orderId,session){
-    
     
     await Promise.all(cart.map(async (item) => {
         const {quantity,price,description}=item
         await OrderItem.create([{quantity,price,description,orderId}],{session})
     }));
 }
+
+orderSchema.pre("remove",async function(next){
+    const order =this;
+    await OrderItem.deleteMany({orderId: order._id})
+    next();
+})
 
 
 const Order = mongoose.model("Order",orderSchema)

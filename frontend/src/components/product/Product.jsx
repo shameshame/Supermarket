@@ -13,7 +13,7 @@ function Product(props) {
         <Box style={productStyle}>
            <Box sx={{width:"200px",height:"200px"}}  component="img"  src={image}/> 
            <Typography variant="p" component="p">{description}</Typography>
-           <Typography variant="h5" component="h5">{price}</Typography>
+           <Typography variant="h5" component="h5">${price}</Typography>
         </Box>
     );
 }

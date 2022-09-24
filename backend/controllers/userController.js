@@ -2,8 +2,6 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler')
 const User = require('../models/userModel')
-const Order = require('../models/orderModel')
-
 
 const accessTokenOptions = {
                         maxAge: 2 * 60 * 60 * 1000,
@@ -11,9 +9,7 @@ const accessTokenOptions = {
                         httpOnly: true
 }
 
-
-
-// Error Handlers
+// Error Handlers (it's better to have them all as statics in user model)
 
 function userExistsHandler(user){
    if(user){
@@ -81,7 +77,7 @@ const loginUser = asyncHandler(async (req, res) => {
               .status(200).json({role:user.role})
        }catch(error){
            res.status(401).json({message: error.message})
-        }
+       }
   })
   
   const fetchUsersByQuery = asyncHandler(async (req, res)=>{
@@ -105,6 +101,14 @@ const getMe = asyncHandler(async (req, res) => {
   res.status(200).json(req.user)
 })
 
+const deleteAccount= async (req, res)=>{
+   await User.findByIdAndDelete(req.params.id,(error,doc)=>{
+      error ? res.status(400).json({message: error.message})
+            : (doc ? res.status(200).json(doc) 
+                   :res.status(400).json({message:"Invalid id"}))
+    })
+}
+
 const logOut = (req,res)=>{
   
   res.clearCookie("logged_in")
@@ -113,10 +117,6 @@ const logOut = (req,res)=>{
                              .json({ message: "Successfully logged out" })
                             
 };
-
-
-
-
 
 // Generate JWT
 const generateToken = (id) => {
@@ -128,5 +128,6 @@ module.exports = {
   loginUser,
   getMe,
   logOut,
-  fetchUsersByQuery
+  fetchUsersByQuery,
+  deleteAccount
 }

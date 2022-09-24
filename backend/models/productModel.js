@@ -33,11 +33,7 @@ const productSchema = mongoose.Schema({
     },
 
     itemsSold:{type:Number,default:0}
-
-    
 })
-
-
 
 const Product = mongoose.model("Product",productSchema)
 

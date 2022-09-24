@@ -29,6 +29,14 @@ const fetchProductsByQuery = asyncHandler(async (req, res)=>{
    res.json(productsSubset)
 })
 
+const deleteProduct= async (req, res)=>{
+    await Product.findByIdAndDelete(req.params.id,(error,doc)=>{
+       error ? res.status(400).json({message: error.message})
+             : (doc ? res.status(200).json(doc) 
+                    :res.status(400).json({message:"Invalid product id"}))
+     })
+ }
+
 module.exports={
     addNewProduct, fetchProductsByQuery
 }
