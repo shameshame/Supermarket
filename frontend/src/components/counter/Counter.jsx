@@ -13,13 +13,13 @@ function Counter(props) {
     
     return (
         <Box  className='product-quantity' sx={countStyle.general}>
-           <IconButton>
-             <RemoveIcon style={countStyle.button}  size="large" onClick={decrement}/>
+           <IconButton onClick={decrement}>
+             <RemoveIcon style={countStyle.button}  size="large" />
            </IconButton>
             
             <TextField align="middle" sx={{ align:"middle", width:"30%"}} size="small" readOnly type="number"   name="quantity" value={count} />
-            <IconButton>
-              <AddIcon  style={countStyle.button} size="large" onClick={increment}/>
+            <IconButton onClick={increment}>
+              <AddIcon  style={countStyle.button} size="large" />
             </IconButton>
         </Box>
     );

@@ -22,9 +22,9 @@ function InventoryItem(props) {
         <Box sx={inventoryItemStyle.general} onMouseOver={()=>setHover(true)} onMouseOut={()=>setHover(false)} border={1} >
            <Product {...props}/>
            {hover && 
-           <Box sx={{display:"flex",justifyContent:"space-between"}} > 
+           <Box sx={{display:"flex",justifyContent:"space-between",mt:2}} > 
             <Counter count={count} decrement={decrement} increment={increment}/> 
-            <Button sx={{px:3}} variant="contained" onClick={()=>dispatch(addToCart({quantity:count,...propsForCart}))} color="secondary">ADD</Button>
+            <Button sx={{px:3}} variant="contained" onClick={()=>dispatch(addToCart({image,quantity:count,...propsForCart}))} color="error">ADD</Button>
            </Box>}
            
         </Box>

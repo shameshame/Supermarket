@@ -32,9 +32,7 @@ function Navbar(props) {
                     variant="outlined"
             />
           <ProfileNavTemplate />
-            <IconButton>
-              <ShoppingCartIcon  color="secondary"/>
-            </IconButton>
+           
           </Toolbar>
        </AppBar>
     );

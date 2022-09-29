@@ -20,9 +20,9 @@ function ShopCounter(props) {
     },[])
 
     
-    return(<Grid container spacing={3}>{products?.map(product=>
-                               <Grid item md={4}>
-                               <InventoryItem {...product}/>
+    return(<Grid  container spacing={3}>{products?.map(product=>
+                               <Grid key={product._id} item md={4}>
+                               <InventoryItem  {...product}/>
                                 </Grid> )}
            </Grid>
     );
