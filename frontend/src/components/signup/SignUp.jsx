@@ -15,6 +15,7 @@ function SignUp(props) {
                          submitHandler:inputs=>signUp(inputs),
                          message:"User registered successfully",
                          buttonText:"SignUp",
+                         formTitle:"Register Form",
                          fieldsToFill:signUpFields
                       }
     return (<FormTemplate {...attributes}/>);

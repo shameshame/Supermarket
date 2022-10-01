@@ -9,7 +9,9 @@ const cartItemStyle = {
        deleteButton:{
           position:"absolute",
           left:"10px",
-          bottom:"10px"
+          bottom:"10px",
+          border:"solid 1px #e0e0e0",
+          borderRadius:"50%"
        }
         
 }

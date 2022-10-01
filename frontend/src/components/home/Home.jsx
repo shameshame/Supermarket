@@ -14,8 +14,8 @@ function Home(props) {
     
     
     return (
-        <Grid sx={{m:2}} columnSpacing={3} style={homeStyle}  container  >
-           <Grid item md={7}>
+        <Grid sx={{mt:10}} columnSpacing={3} style={homeStyle}  container  >
+           <Grid item md={8}>
               <ShopCounter queryString="sortBy=itemsSold_desc&limit=20"/>
            </Grid>
            <Grid  item md={4}>

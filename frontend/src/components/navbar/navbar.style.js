@@ -1,7 +1,6 @@
 const navbar= {
     app:{
         backgroundColor:"white",
-        
     },
 
     toolbar:{

@@ -1,7 +1,7 @@
 const countStyle={
     general:{
-       
-      padding: "0"
+      display:"flex",
+      
     },
     
     button:{

@@ -1,17 +1,18 @@
 import {useNavigate} from "react-router-dom";
 import {useState,useEffect} from "react";
-import {FormProvider, useForm,useFormContext } from 'react-hook-form';
+import {FormProvider, useForm} from 'react-hook-form';
 import TextField from '@mui/material/TextField';
 import {toast } from 'react-toastify';
-
-import Box from '@mui/material/Box'
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 import customValidationFields from "./customValidationFields.js"
 import LoadingButton from '@mui/lab/LoadingButton'
+import formStyle from "./formTemplate.style.js";
 
 function FormTemplate(props) {
     
     const {fieldsToFill,buttonText,submitHandler,redirect,message,
-           isLoading, isSuccess, error, isError,data,
+           isLoading, isSuccess, error, isError,data, formTitle,
           }=props
     const [inputFields, setInputFields] = useState({})
     const navigate = useNavigate();
@@ -62,9 +63,10 @@ function FormTemplate(props) {
 
     return ( 
         <FormProvider {...methods}>
-          <Box component="form" onSubmit={handleSubmit(()=>submitHandler(inputFields))}>
+          <Container style={formStyle.general} component="form" onSubmit={handleSubmit(()=>submitHandler(inputFields))} maxWidth="xs">
+            <Typography style={formStyle.title} variant="h4">{formTitle}</Typography>
            {fieldsToFill?.map((field,index)=>
-           <TextField key={index} type={field.type} label={field.label} 
+           <TextField style={formStyle.textField} fullWidth key={index} type={field.type} label={field.label} 
                     {...register(field.name, {required:`${field.name} is required`,
                                          pattern:field.pattern,
                                          // Check if you  can change this line by passing useFormContext
@@ -78,11 +80,12 @@ function FormTemplate(props) {
                      helperText={errors?.[field.name]? errors[field.name].message : null} 
             />
             )}
-            <LoadingButton type="submit"  loading={isLoading} variant="contained" color="primary" >
+             
+            <LoadingButton fullWidth style={formStyle.loadingButton} type="submit"  loading={isLoading} variant="contained" color="primary" >
                 {buttonText}
            </LoadingButton> 
           
-        </Box>
+        </Container>
        
         </FormProvider>
     );

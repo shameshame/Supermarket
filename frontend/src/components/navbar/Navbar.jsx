@@ -14,7 +14,7 @@ import navbar from "./navbar.style";
 
 function Navbar(props) {
     return (
-        <AppBar sx={navbar.app}  position="static">
+        <AppBar sx={navbar.app} >
             <CssBaseline />
           <Toolbar sx={navbar.toolbar}>
             <Typography sx={navbar.logo} variant="h4" component={Link} to="/" >
@@ -32,7 +32,7 @@ function Navbar(props) {
                     variant="outlined"
             />
           <ProfileNavTemplate />
-           
+            
           </Toolbar>
        </AppBar>
     );
