@@ -1,16 +1,13 @@
 const cartStyle={
    general:{
     overflowY:"scroll",
+    
    }, 
    
-   headline:{
-      backgroundColor:"#392F5A",
-      display: "flex",
-      justifyContent:"space-between"
-   },
+   
 
    iconButton:{
-    color:"#F7FFF7",
+    color:"#392F5A",
     display: "block"
    },
 
@@ -29,9 +26,14 @@ const cartStyle={
    },
 
    expanded:{
-     transform:"translateY(100vh)",
+     transform:"translateY(60vh)",
      transition:"linear 300ms",
     
+   },
+
+   hidden:{
+    transform:"translateY(0)",
+    transition:"linear 300ms",
    },
 
    emptyCart:{

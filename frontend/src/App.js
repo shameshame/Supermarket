@@ -9,14 +9,17 @@ import CustomerProfile from "./components/customerProfile/CustomerProfile.jsx"
 import AdminProfile from "./components/adminProfile/AdminProfile.jsx"
 import Unauthorized from "./components/unauthorizedPage/Unauthorized.jsx"
 import MyOrders from "./components/myOrders/MyOrders.jsx"
+import ShopNav from "./components/shopNav/ShopNav.jsx";
+import ShopCounter from "./components/shopCounter/ShopCounter.jsx"
 
 function App() {
   return (<BrowserRouter>
              <Navbar/>
+             <ShopNav/>
              <Routes>
                 <Route path="/">
                       {/* Public routes */}
-                  <Route path="/" element={<Home />}/>
+                  <Route path="/" element={<ShopCounter queryString="sortBy=itemsSold_desc&limit=20"/> }/>
                   <Route path="/login" element={<Login />}/>
                   <Route path="/register" element={<SignUp />}/>
                   <Route path="/unauthorized" element = {<Unauthorized/>}/>

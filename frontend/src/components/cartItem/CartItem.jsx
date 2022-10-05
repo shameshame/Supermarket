@@ -29,7 +29,7 @@ function CartItem(props) {
            </Grid>
             
             <Grid item xs={1}><Typography variant="h6">${price}</Typography></Grid>
-            {hover && <IconButton sx={{position:"relative"}}> <ClearIcon style={cartItemStyle.deleteButton} onClick={()=>dispatch(removeFromCart(_id))} color="primary"/></IconButton>}
+            {hover && <IconButton onClick={()=>dispatch(removeFromCart(_id))} sx={{position:"relative"}}> <ClearIcon style={cartItemStyle.deleteButton}  color="primary"/></IconButton>}
         </Grid>
           
         </Card>
