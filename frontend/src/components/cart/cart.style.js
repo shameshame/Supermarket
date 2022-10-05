@@ -4,11 +4,17 @@ const cartStyle={
     
    }, 
    
-   
+   emptyCart:{
+     
+   },
 
    iconButton:{
     color:"#392F5A",
     display: "block"
+   },
+
+   bagIcon:{
+     color:"#e6e6e6"
    },
 
    cartButton:{
@@ -34,6 +40,7 @@ const cartStyle={
    hidden:{
     transform:"translateY(0)",
     transition:"linear 300ms",
+    backgroundColor:"#e6e6e6"
    },
 
    emptyCart:{

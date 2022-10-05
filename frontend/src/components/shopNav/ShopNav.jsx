@@ -11,7 +11,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import Typography from '@mui/material/Typography';
 import Cart from "../cart/Cart"
-import cartStyle from "../cart/cart.style"
+import {useSelector} from "react-redux"
 
 import {useState} from "react"
 
@@ -19,7 +19,7 @@ import {useState} from "react"
 function ShopNav(props) {
     
     const [value, setValue] = useState('1');
-    
+    const cart = useSelector(state=>state.cart.cartItems)
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -42,17 +42,17 @@ function ShopNav(props) {
                 </TabContext>
             </Grid>
             <Grid style={shopNavStyle.cartHeadline}  item lg={4}>
-                <Typography variant="h6">  My Cart</Typography>
-                <Stack direction="row">
+                <Typography variant="p">  My Cart</Typography>
+                {cart.length>0 && <Stack direction="row">
                    <IconButton style={shopNavStyle.iconButton}>
-                     <SaveAltIcon sx={{fontSize:"1.5rem"}}/>
-                     <Typography paragraph>Save Cart</Typography>
+                     <SaveAltIcon sx={{fontSize:"2rem"}}/>
+                     {/* <Typography paragraph>Save Cart</Typography> */}
                    </IconButton>
                    <IconButton style={shopNavStyle.iconButton}>
-                    <DeleteIcon sx={{fontSize:"1.5rem"}}/>
-                    <Typography paragraph>Empty Cart</Typography>
+                    <DeleteIcon sx={{fontSize:"2rem"}}/>
+                    {/* <Typography paragraph>Empty Cart</Typography> */}
                    </IconButton>
-                </Stack>
+                </Stack>}
                 <Cart />
             
            </Grid>

@@ -11,7 +11,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ShoppingCartSharpIcon from '@mui/icons-material/ShoppingCartSharp';
-
+import LocalMallIcon from '@mui/icons-material/LocalMall';
 
 function Cart(props) {
     
@@ -49,9 +49,10 @@ function Cart(props) {
           {/* <AccordionDetails > */}
             
             {!cart.length ?<Box >
-                <Typography sx={{textAlign:"center"}} variant="h5">Let's start shopping,buddy</Typography>
-                            <Box  sx={{width:"25.5rem",height:"300px"}}   component="img" src="https://res.cloudinary.com/dk2ezfo5x/image/upload/v1664618913/shopping-bag-rotate_hhqfhz.svg"/>
-                           </Box>
+                
+                  <LocalMallIcon style={cartStyle.bagIcon} sx={{width:"25.5rem",height:"200px"}}/>
+                  <Typography sx={{textAlign:"center"}} paragraph>Let's start shopping,buddy...</Typography>
+                  </Box>          
                           :cart.map(item=><CartItem key={item} {...item}/>)}
           {/* </AccordionDetails> */}
         </Box>
