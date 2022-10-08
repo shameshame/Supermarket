@@ -31,9 +31,10 @@ function Cart(props) {
    
     return (
        
-        <Accordion sx={{position:"fixed",top:"150px"}}    expanded={expanded}  elevation={0}>
+        <Accordion  sx={cartStyle.accordion} expanded={expanded}  elevation={0}>
           
-        <AccordionSummary
+        <AccordionSummary 
+           
            expandIcon={<ExpandMoreIcon onClick={()=>dispatch(toggleCart(!expanded))}/>}
            aria-controls="panel1a-content"
            style={expanded?cartStyle.expanded:cartStyle.hidden}
@@ -45,15 +46,17 @@ function Cart(props) {
             </Badge>
           
         </AccordionSummary>
-        <Box  style={cartStyle.general}>
+        <Box  >
           {/* <AccordionDetails > */}
             
             {!cart.length ?<Box >
                 
-                  <LocalMallIcon style={cartStyle.bagIcon} sx={{width:"25.5rem",height:"200px"}}/>
+                  <LocalMallIcon style={cartStyle.bagIcon} />
                   <Typography sx={{textAlign:"center"}} paragraph>Let's start shopping,buddy...</Typography>
                   </Box>          
-                          :cart.map(item=><CartItem key={item} {...item}/>)}
+                          :<Box style={cartStyle.general}>
+                             {cart.map(item=><CartItem  key={item} {...item}/>)}
+                           </Box>}
           {/* </AccordionDetails> */}
         </Box>
         </Accordion>

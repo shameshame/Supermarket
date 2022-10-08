@@ -12,6 +12,7 @@ import TabList from '@mui/lab/TabList';
 import Typography from '@mui/material/Typography';
 import Cart from "../cart/Cart"
 import {useSelector} from "react-redux"
+import Button from "@mui/material/Button"
 
 import {useState} from "react"
 
@@ -19,6 +20,7 @@ import {useState} from "react"
 function ShopNav(props) {
     
     const [value, setValue] = useState('1');
+    const [hover,setHover]=useState(false)
     const cart = useSelector(state=>state.cart.cartItems)
 
     const handleChange = (event, newValue) => {
@@ -28,18 +30,13 @@ function ShopNav(props) {
     
     return (
         <Grid style={shopNavStyle.general}   columnSpacing={2} sx={{mt:5}} container>
-            <Grid item lg={8}>
-              <TabContext value={value}>
-                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <TabList onChange={handleChange} aria-label="lab API tabs example">
-                       <Tab label="Item One" value="1" style={{minWidth:"25%"}} />
-                       <Tab label="Item Two" value="2" style={{minWidth:"25%"}}/>
-                       <Tab label="Item Three" value="3" style={{minWidth:"25%"}}/>
-                       <Tab label="Item Four" value="4" style={{minWidth:"25%"}}/>
-                    </TabList>
-                </Box>
-                   
-                </TabContext>
+            <Grid sx={{backgroundColor:"primary.main"}}  item lg={8}>
+              
+              {["Food","Special offers","Cosmetics","Appliances"].map((item,index)=>
+                <Button  sx={shopNavStyle.tabs}   >{item}</Button>
+              )}
+              
+              
             </Grid>
             <Grid style={shopNavStyle.cartHeadline}  item lg={4}>
                 <Typography variant="p">  My Cart</Typography>

@@ -1,5 +1,5 @@
 const shopCounter = {
-    backgroundColor:"#fafafa",
+    backgroundColor:"#F0F8Ff",
     marginTop:"14rem"
 
 }

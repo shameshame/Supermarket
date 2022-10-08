@@ -1,20 +1,26 @@
 const cartStyle={
    general:{
     overflowY:"scroll",
+    position:"relative",
+    top:"-7rem"
     
    }, 
-   
-   emptyCart:{
-     
-   },
 
+   accordion:{
+    position:"fixed",
+    top:"150px",
+    backgroundColor:"transparent"
+   },
+   
    iconButton:{
     color:"#392F5A",
     display: "block"
    },
 
    bagIcon:{
-     color:"#e6e6e6"
+     color:"#e6e6e6",
+     width:"25.5rem",
+     height:"200px"
    },
 
    cartButton:{
@@ -38,9 +44,11 @@ const cartStyle={
    },
 
    hidden:{
-    transform:"translateY(0)",
+    transform:"translateY(-1.2rem)",
     transition:"linear 300ms",
-    backgroundColor:"#e6e6e6"
+    backgroundColor:"#e6e6e6",
+    
+    
    },
 
    emptyCart:{
