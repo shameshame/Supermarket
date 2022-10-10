@@ -4,6 +4,8 @@ import Grid from '@mui/material/Grid'
 import InventoryItem from "../item/InventoryItem.jsx"
 import {useSelector} from "react-redux"
 import shopCounter from "./shopCounter.style"
+import Box from '@mui/material/Box'
+import ShopNav from "../shopNav/ShopNav.jsx"
 
 function ShopCounter(props) {
     const {queryString}=props
@@ -22,15 +24,18 @@ function ShopCounter(props) {
     },[])
 
     
-    return( <Grid    style={shopCounter}  container  >
-               <Grid item md={expanded?8:12}>
+    return( <Box>
+              <ShopNav/>
+              <Grid    style={shopCounter}  container  >
+                 <Grid item md={expanded?8:12}>
                    <Grid  container spacing={3}>{products?.map(product=>
                             <Grid key={product._id} item md={4}>
                                <InventoryItem  {...product}/>
                             </Grid> )}
                     </Grid>
-                </Grid> 
-            </Grid>
+                  </Grid> 
+               </Grid>
+            </Box>
     );          
           
 }

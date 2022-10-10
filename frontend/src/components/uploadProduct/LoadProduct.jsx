@@ -56,7 +56,7 @@ function LoadProduct(props) {
             {image.preview && <img  src={image.preview} width='100' height='100' />}
             <hr/>
            
-             <form  onChange={handleFormChange} >
+             <form style={newProductForm}  onChange={handleFormChange} >
              
                {/* This must be a separate component(till closing label tag) */}
                <input onChange={handleFileChange} style={{ display: 'none' }} id="upload-photo" name="uploaded-photo" type="file" />

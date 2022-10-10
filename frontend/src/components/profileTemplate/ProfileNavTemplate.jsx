@@ -32,7 +32,7 @@ function ProfileNavTemplate(props) {
                         aria-haspopup ='true' 
                         aria-expanded={userMenuOpen ? "true":undefined}>
                  <AccountCircleIcon  />
-                  Hello, {loggedIn?.name? loggedIn.name: `SignIn`}
+                  {loggedIn?.name? loggedIn.name: `Sign In`}
             </IconButton>
             <Menu open={userMenuOpen} 
               anchorEl={anchorEl} 

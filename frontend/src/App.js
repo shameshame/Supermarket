@@ -1,7 +1,6 @@
 import {BrowserRouter,Routes,Route} from "react-router-dom";
 import Navbar from './components/navbar/Navbar'
 import LoadProduct from "./components/uploadProduct/LoadProduct";
-import Home from "./components/home/Home"
 import SignUp from "./components/signup/SignUp.jsx"
 import Login from "./components/login/Login.jsx"
 import ProtectedRoute from "./components/protectedRoute/ProtectedRoute.jsx"
@@ -9,13 +8,14 @@ import CustomerProfile from "./components/customerProfile/CustomerProfile.jsx"
 import AdminProfile from "./components/adminProfile/AdminProfile.jsx"
 import Unauthorized from "./components/unauthorizedPage/Unauthorized.jsx"
 import MyOrders from "./components/myOrders/MyOrders.jsx"
-import ShopNav from "./components/shopNav/ShopNav.jsx";
+
 import ShopCounter from "./components/shopCounter/ShopCounter.jsx"
 
 function App() {
+  
+  
   return (<BrowserRouter>
              <Navbar/>
-             <ShopNav/>
              <Routes>
                 <Route path="/">
                       {/* Public routes */}
