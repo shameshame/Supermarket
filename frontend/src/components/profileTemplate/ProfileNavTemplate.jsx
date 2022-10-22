@@ -34,7 +34,7 @@ function ProfileNavTemplate(props) {
                  <AccountCircleIcon  />
                   {loggedIn?.name? loggedIn.name: `Sign In`}
             </IconButton>
-            <Menu open={userMenuOpen} 
+            {anchorEl && loggedIn && <Menu open={userMenuOpen} 
               anchorEl={anchorEl} 
               id="account-menu" 
               MenuListProps={{"aria-labelledby":"account-button",}}
@@ -51,7 +51,7 @@ function ProfileNavTemplate(props) {
               }}
             >
                   {profileMenu[loggedIn?.role]?.map((item)=><ProfileMenuItem {...item}/>)}
-            </Menu>
+            </Menu>}
         </Box>
        
     );

@@ -5,10 +5,12 @@ const {
   loginUser,
   getMe,
   logOut,
-  deleteAccount
+  deleteAccount,
+  fetchUsersByQuery
 } = require('../controllers/userController')
 const { authorization } = require('../middleware/authMiddleware')
 
+router.get("/",fetchUsersByQuery)
 router.post('/signup', registerUser)
 router.post('/login', loginUser)
 router.get('/logout', authorization,logOut)

@@ -1,18 +1,9 @@
 import MyOrders from "../myOrders/MyOrders";
+import {customerPanelMenu} from "./customerMenu.js";
+import PanelTemplate from "../panelTemplate/PanelTemplate.jsx"
 
 function CustomerProfile(props) {
-    return (<>
-             Customer Profile
-            
-            {/* User details : e-mail, name 
-                Change password
-                My orders (table - each line includes order status , )
-            
-            */}
-
-            <MyOrders/>
-           
-        </>
+    return (<PanelTemplate features={customerPanelMenu} role="Customer"/>
     );
 }
 

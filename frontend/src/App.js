@@ -8,8 +8,10 @@ import CustomerProfile from "./components/customerProfile/CustomerProfile.jsx"
 import AdminProfile from "./components/adminProfile/AdminProfile.jsx"
 import Unauthorized from "./components/unauthorizedPage/Unauthorized.jsx"
 import MyOrders from "./components/myOrders/MyOrders.jsx"
+import UserList from "./components/userList/UserList";
 
 import ShopCounter from "./components/shopCounter/ShopCounter.jsx"
+import "../src/components/userList/UserList.css"
 
 function App() {
   
@@ -30,8 +32,9 @@ function App() {
                   </Route>
                   
                   
-                  <Route element={<ProtectedRoute allowedRoles={["Admin"]}/>}>
+                  <Route path="/admin" element={<ProtectedRoute allowedRoles={["Admin"]}/>}>
                     <Route path="/admin" element={<AdminProfile/>}/>
+                    <Route path="user_list" element={<UserList/>}/>
                   </Route>
                   <Route element={<ProtectedRoute allowedRoles={["Admin","Storekeeper"]}/>}>
                     <Route path="/new_product" element = {<LoadProduct/>}/>

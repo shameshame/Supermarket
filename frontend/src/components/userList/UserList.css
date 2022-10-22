@@ -1,0 +1,17 @@
+@media screen and (max-width: 600px){
+  .MuiTable-root .MuiTableHead-root {
+      display: none;
+  }
+  
+  .MuiTable-root .MuiTableCell-root {
+    display:flex;
+  }
+
+  .MuiTable-root .MuiTableCell-root::before {
+    content: attr(label);
+    font-weight: bold;
+    width: 100px;
+    min-width: 100px;
+  }
+
+}

@@ -72,6 +72,8 @@ const loginUser = asyncHandler(async (req, res) => {
        try{
            const user = await User.findOne({ email })
            await invalidLoginHandler(user,password)
+           user.lastLogin = User.formatDate(new Date())
+           await user.save()
            res.cookie("logged_in",true,{...accessTokenOptions,httpOnly:false})
            res.cookie('access_token',generateToken(user._id),accessTokenOptions)
               .status(200).json({role:user.role})

@@ -11,6 +11,7 @@ export const userApi = createApi({
     
     
     endpoints: (builder) => ({
+      
       getMe: builder.query({
         query() {
           return {
@@ -28,8 +29,19 @@ export const userApi = createApi({
         },
         //END OF getME
       }),
+
+      getAllUsers:builder.query({
+        query() {
+          return {
+            url: '/',
+            credentials: 'include'
+          };
+        }
+
+      })
     
     
     }),
   });
   
+  export const {useGetMeQuery,useGetAllUsersQuery}=userApi

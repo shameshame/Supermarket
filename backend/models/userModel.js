@@ -25,6 +25,10 @@ const userSchema=mongoose.Schema({
     role:{type:String,
           enum: ['Admin', 'Customer','Storekeeper'],
           default:"Customer"
+    },
+    lastLogin: {
+        type: String,
+        default: Date().toString()
     }
 },{
     toJSON:{virtuals:true},
@@ -38,6 +42,17 @@ userSchema.statics.findByCredentials = async (email,password)=>{
         throw new Error("Invalid credentials");
 
     return foundUser ;
+}
+
+userSchema.statics.formatDate= (date)=>{
+    let day = date.getDate()<10 ? `0${date.getDate()}`:date.getDate()
+    let year = date.getFullYear();
+    let month=date.getMonth() + 1;
+    let hours= date.getHours();
+    let minutes=date.getMinutes();
+
+    
+    return `${day}-${month}-${year},${hours}:${minutes}`;
 }
 
 userSchema.virtual("orders",{
