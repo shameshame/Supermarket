@@ -38,10 +38,22 @@ export const userApi = createApi({
           };
         }
 
+      }),
+
+      updateUserAccount:builder.mutation({
+         query(updateData){
+          
+           return{
+             method: 'PUT',
+             url:"/update",
+             body: updateData,
+             credentials: 'include'
+           } 
+         }
       })
     
     
     }),
   });
   
-  export const {useGetMeQuery,useGetAllUsersQuery}=userApi
+  export const {useGetMeQuery,useGetAllUsersQuery,useUpdateUserAccountMutation}=userApi

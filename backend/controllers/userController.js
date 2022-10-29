@@ -91,7 +91,7 @@ const loginUser = asyncHandler(async (req, res) => {
        sort[parts[0]] = parts[1].toLowerCase()==="desc"?-1:1
     }
     
-    let userSubset= await User.find(rest,null,{sort,limit})
+    let userSubset= await User.find(rest,null,{sort,limit}).select('-password')
     res.json(userSubset)
  })
 
@@ -101,6 +101,15 @@ const loginUser = asyncHandler(async (req, res) => {
 // @access  Private
 const getMe = asyncHandler(async (req, res) => {
   res.status(200).json(req.user)
+})
+
+const updateAccount = asyncHandler(async (req, res)=>{
+     try{
+        const {_id,...fieldsToUpdate}=req.body
+        await User.findByIdAndUpdate(_id,fieldsToUpdate)
+      }catch (error) {
+        res.status(400).json({message: error.message})
+      }
 })
 
 const deleteAccount= async (req, res)=>{
@@ -131,5 +140,6 @@ module.exports = {
   getMe,
   logOut,
   fetchUsersByQuery,
+  updateAccount,
   deleteAccount
 }
