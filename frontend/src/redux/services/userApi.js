@@ -40,6 +40,8 @@ export const userApi = createApi({
 
       }),
 
+      
+
       updateUserAccount:builder.mutation({
          query(updateData){
           
@@ -50,10 +52,26 @@ export const userApi = createApi({
              credentials: 'include'
            } 
          }
-      })
+      }),
+      
+      deleteAccount:builder.mutation({
+        query(id) {
+          return {
+            method: 'DELETE',
+            url: `/${id}`,
+            credentials: 'include'
+          };
+        }
+      
+      }),
     
     
     }),
   });
+
+  export default userApi
   
-  export const {useGetMeQuery,useGetAllUsersQuery,useUpdateUserAccountMutation}=userApi
+  export const { useGetMeQuery,useGetAllUsersQuery,
+                 useUpdateUserAccountMutation,
+                 useDeleteAccountMutation
+                }=userApi

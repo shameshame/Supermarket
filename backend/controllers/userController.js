@@ -113,7 +113,8 @@ const updateAccount = asyncHandler(async (req, res)=>{
 })
 
 const deleteAccount= async (req, res)=>{
-   await User.findByIdAndDelete(req.params.id,(error,doc)=>{
+   
+  User.findByIdAndDelete(req.params['id'],(error,doc)=>{
       error ? res.status(400).json({message: error.message})
             : (doc ? res.status(200).json(doc) 
                    :res.status(400).json({message:"Invalid id"}))

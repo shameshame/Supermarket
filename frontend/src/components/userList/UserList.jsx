@@ -14,7 +14,7 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import {useGetAllUsersQuery} from "../../redux/services/userApi"
+import userApi from "../../redux/services/userApi"
 import CircularProgress from '@mui/material/CircularProgress'
 import EditableRow from '../editableRow/EditableRow';
 import Checkbox from '@mui/material/Checkbox';
@@ -29,16 +29,24 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { useTheme } from '@mui/material/styles';
 import {useState,useEffect} from "react"
+import {useDispatch} from "react-redux"
 
 
 function UserList(props) {
-    const {data,isSuccess} = useGetAllUsersQuery(null)
+    
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(1);
-    const [rows,setRows]= useState(data)
+    const [rows,setRows]= useState()
+
+    const [trigger, result, lastPromiseInfo] = userApi.useLazyGetAllUsersQuery()
 
     useEffect(() => {
-        if(isSuccess) setRows(data)
+        const fetchUsers= async()=>{
+            const userList=await trigger().unwrap()
+            setRows(userList)
+        }  
+        
+        fetchUsers()
     },[])
     
     const handleChangePage = (event, newPage) => {
@@ -50,14 +58,14 @@ function UserList(props) {
         setPage(0);
     };
 
-    const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data?.length) : 0;
+    // const emptyRows =
+    // page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data?.length) : 0;
 
     const fieldsToDisplay=["name","email","role","lastLogin"]
     const rowData = {rows,setRows,fieldsToDisplay}
     
-    return (<>
-             {isSuccess ? <Box style={userListStyle.general}>
+    return (
+              <Box style={userListStyle.general}>
                         <TableContainer style={userListStyle.table}   >
                            <Table  aria-label="simple table">
                               <TableHead style={userListStyle.head}>
@@ -66,37 +74,28 @@ function UserList(props) {
                                   <TableCell style={userListStyle.head.cell} >E-mail</TableCell>
                                   <TableCell style={userListStyle.head.cell}>Role</TableCell>
                                   <TableCell style={userListStyle.head.cell}>Last seen</TableCell>
-            
                                 </TableRow>
                               </TableHead>
                               <TableBody>
                                 {rows?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((account) => (
-                                    
                                     <EditableRow key={account._id}  account={account} {...rowData}/>
                                 ))}
                                 
-                                 </TableBody>
+                              </TableBody>
                              
                            </Table>
                            <TablePagination
-                          rowsPerPageOptions={[1, 10, 25]}
-                          component="div"
-                          count={data.length}
-                          rowsPerPage={rowsPerPage}
-                          page={page}
-                          onPageChange={handleChangePage}
-                          onRowsPerPageChange={handleChangeRowsPerPage}
-                        />
+                              rowsPerPageOptions={[1, 10, 25]}
+                              component="div"
+                              count={rows?.length}
+                              rowsPerPage={rowsPerPage}
+                              page={page}
+                              onPageChange={handleChangePage}
+                              onRowsPerPageChange={handleChangeRowsPerPage}
+                            />
                         </TableContainer>
-                        {console.log("Page",page)}
-                                    {console.log("Rows per Page",rowsPerPage)}
-                       
-                    </Box>
-            
-                    :<CircularProgress/>}
-            </>
-        
-    );
+                </Box>
+            );
 }
 
 export default UserList;

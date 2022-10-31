@@ -14,7 +14,7 @@ function PanelTemplate(props) {
         <Box style={welcomePage.general}>
               <Box style={welcomePage.menu}>
                  <Typography  variant="h4">Welcome to {role} Panel</Typography>
-                 {features.map(item=> <Button onClick={()=>navigate(`${labelLinkMap[item.label]}`)} fullWidth style={welcomePage.menu.button}>{item.label}</Button>)}
+                 {features.map(item=><Button key={item.label} onClick={()=>navigate(`${labelLinkMap[item.label]}`)} fullWidth style={welcomePage.menu.button}>{item.label}</Button>)}
               </Box>
         </Box>
     );
