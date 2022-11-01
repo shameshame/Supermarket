@@ -1,7 +1,5 @@
 import Box from '@mui/material/Box';
 import userListStyle from './userList.style';
-import PropTypes from 'prop-types';
-import { alpha } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -9,45 +7,43 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import {useSelector} from "react-redux"
-import TableSortLabel from '@mui/material/TableSortLabel';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
 import userApi from "../../redux/services/userApi"
 import CircularProgress from '@mui/material/CircularProgress'
 import EditableRow from '../editableRow/EditableRow';
-import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
-import { visuallyHidden } from '@mui/utils';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import { useTheme } from '@mui/material/styles';
 import {useState,useEffect} from "react"
-import {useDispatch} from "react-redux"
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 
 function UserList(props) {
     
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(1);
-    const [rows,setRows]= useState()
+    
+    //Create single state instead of 2 separate
+    const [table,setTable]= useState({rows:[],successAlertOpen:false,errorAlertOpen:false})
+    const {rows,successAlertOpen,errorAlertOpen}=table
+    
 
     const [trigger, result, lastPromiseInfo] = userApi.useLazyGetAllUsersQuery()
 
     useEffect(() => {
         const fetchUsers= async()=>{
             const userList=await trigger().unwrap()
-            setRows(userList)
+            setTable({...table,rows:userList})
         }  
         
         fetchUsers()
     },[])
+
+    const handleCloseAlert = (event, reason,alert) => {
+        if (reason === "clickaway") {
+            return;
+        }
+
+        
+        setTable({...table,[alert]:false});
+    };
     
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -62,7 +58,7 @@ function UserList(props) {
     // page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data?.length) : 0;
 
     const fieldsToDisplay=["name","email","role","lastLogin"]
-    const rowData = {rows,setRows,fieldsToDisplay}
+    const rowData = {table,setTable,fieldsToDisplay}
     
     return (
               <Box style={userListStyle.general}>
@@ -77,6 +73,25 @@ function UserList(props) {
                                 </TableRow>
                               </TableHead>
                               <TableBody>
+                                <Snackbar
+                                   open={successAlertOpen}
+                                   autoHideDuration={2000}
+                                   onClose={(event)=>handleCloseAlert(event,null,"successAlertOpen")}
+                                >   
+                                 <Alert  severity="success">
+                                      Records saved successfully!
+                                 </Alert>
+                                </Snackbar>
+                                <Snackbar
+                                   open={errorAlertOpen}
+                                   autoHideDuration={2000}
+                                   onClose={(event)=>handleCloseAlert(event,null,"errorAlertOpen")}
+                                >   
+                                  <Alert onClose={(event)=>handleCloseAlert(event,null,"errorAlertOpen")} severity="error">
+                                       Failed to save changes
+                                  </Alert>
+                                </Snackbar>
+                                
                                 {rows?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((account) => (
                                     <EditableRow key={account._id}  account={account} {...rowData}/>
                                 ))}

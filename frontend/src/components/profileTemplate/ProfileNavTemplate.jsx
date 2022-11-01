@@ -50,7 +50,7 @@ function ProfileNavTemplate(props) {
                   horizontal:"right"
               }}
             >
-                  {profileMenu[loggedIn?.role]?.map((item)=><ProfileMenuItem key={item} {...item}/>)}
+                  {profileMenu[loggedIn?.role]?.map((item,index)=><ProfileMenuItem key={index} {...item}/>)}
             </Menu>}
         </Box>
        

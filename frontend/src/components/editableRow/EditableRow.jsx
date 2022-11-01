@@ -15,7 +15,8 @@ import {
 import { listItemAvatarClasses } from "@mui/material";
 
 function EditableRow(props) {
-    const {rows,setRows,fieldsToDisplay,account}=props
+    const {table,setTable,fieldsToDisplay,account}=props
+    const {rows}=table
     
     //RTK hooks for api calls
     const [triggerForEditing,result]=useUpdateUserAccountMutation()
@@ -24,29 +25,38 @@ function EditableRow(props) {
    
 
     // Initial states
-    const [open, setOpen] = useState(false);
+   
     const [isEdit, setEdit] = useState(false);
     const [editableRow,setEditableRow]= useState(account)
-    const [disable, setDisable] = useState(true);
     const [showConfirm, setShowConfirm] = useState(false);
     
     
-   const handleSave = () => {
-        
-        let updatedRows= rows.filter(row=>row._id!==editableRow._id)
-        updatedRows.push(editableRow)
-        setRows(updatedRows);
-        setEdit(!isEdit);
-        triggerForEditing(editableRow)
+   const handleSave = async () => {
+      try{  
+          await triggerForEditing(editableRow).unwrap()
+          let updatedRows= rows.filter(row=>row._id!==editableRow._id)
+          updatedRows.push(editableRow)
+          setTable({...table,rows:updatedRows,successAlertOpen:true})
+          setEdit(!isEdit);
+        }catch (error) {
+          setTable({...table,errorAlertOpen:true})
+       }
     };
 
-    const handleDelete=()=>{
-        let rowsAfterDeletion = rows.filter(row=>row._id!==editableRow._id)
-        setRows(rowsAfterDeletion)
-        triggerForDeletion(editableRow._id)
+    const handleDelete= async ()=>{
+       try{
+         await triggerForDeletion(editableRow._id).unwrap()
+         let rowsAfterDeletion = rows.filter(row=>row._id!==editableRow._id)
+         setTable({...table,rows:rowsAfterDeletion,alertSuccessOpen:true})
+       }catch (error) {
+        setTable({...table,alertErrorOpen:true})
+       } 
+        
+        
     }
+    
     const handleChange = (event) => {
-        // setDisable(false);
+        
         const {name,value}= event.target
         setEditableRow({...editableRow,[name]:value})
     };
@@ -55,7 +65,7 @@ function EditableRow(props) {
     return (
         <TableRow  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
             {isEdit ? fieldsToDisplay.map(field=>fieldInputMap[field]?.input ? fieldInputMap[field].input(handleChange,editableRow[field]) 
-                                                                             :<TextField inputProps={{readOnly:field==="lastLogin"}}
+                                                                             :<TextField key={field} inputProps={{readOnly:field==="lastLogin"}}
                                                                               type=
                                                                               {
                                                                                 fieldInputMap[field]?.type
@@ -70,7 +80,7 @@ function EditableRow(props) {
                     : fieldsToDisplay.map(field=><TableCell key={field}>{editableRow[field]}</TableCell>)
             }
             <TableCell>
-               <IconButton onClick={isEdit ? handleSave : ()=>setEdit(true)}>
+               <IconButton onClick={isEdit ? ()=> handleSave() : ()=>setEdit(true)}>
                  {isEdit? <DoneIcon /> : <EditIcon />}
                 </IconButton>
             </TableCell>

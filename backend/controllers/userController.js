@@ -106,7 +106,11 @@ const getMe = asyncHandler(async (req, res) => {
 const updateAccount = asyncHandler(async (req, res)=>{
      try{
         const {_id,...fieldsToUpdate}=req.body
-        await User.findByIdAndUpdate(_id,fieldsToUpdate)
+        let userToUpdate = await User.findById(_id)
+        const fieldArray= Object.keys(fieldsToUpdate)
+        fieldArray.forEach(field=>userToUpdate[field]=fieldsToUpdate[field])
+        userToUpdate.save()
+        res.status(200).json({message: "Updated successfully"})
       }catch (error) {
         res.status(400).json({message: error.message})
       }
