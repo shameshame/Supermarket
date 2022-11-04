@@ -16,7 +16,8 @@ const userListStyle={
     },
 
     head:{
-       backgroundColor:"#191716" ,
+       backgroundColor:"#191716",
+       
        color:"#F7F0F0",
 
        cell:{

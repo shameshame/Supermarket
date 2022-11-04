@@ -70,6 +70,8 @@ function UserList(props) {
                                   <TableCell style={userListStyle.head.cell} >E-mail</TableCell>
                                   <TableCell style={userListStyle.head.cell}>Role</TableCell>
                                   <TableCell style={userListStyle.head.cell}>Last seen</TableCell>
+                                  <TableCell style={userListStyle.head.cell}></TableCell>
+                                  <TableCell style={userListStyle.head.cell}></TableCell>
                                 </TableRow>
                               </TableHead>
                               <TableBody>

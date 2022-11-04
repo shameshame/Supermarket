@@ -51,8 +51,6 @@ function EditableRow(props) {
        }catch (error) {
         setTable({...table,alertErrorOpen:true})
        } 
-        
-        
     }
     
     const handleChange = (event) => {
@@ -64,21 +62,27 @@ function EditableRow(props) {
     
     return (
         <TableRow  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-            {isEdit ? fieldsToDisplay.map(field=>fieldInputMap[field]?.input ? fieldInputMap[field].input(handleChange,editableRow[field]) 
-                                                                             :<TextField key={field} inputProps={{readOnly:field==="lastLogin"}}
-                                                                              type=
-                                                                              {
-                                                                                fieldInputMap[field]?.type
-                                                                                ? fieldInputMap[field].type
-                                                                                :"text"
-                                                                              }
-                                                                              name={field}
-                                                                              onChange={event=>handleChange(event)}
-                                                                              value={editableRow[field]}
-                                                                             />
-                                          )
-                    : fieldsToDisplay.map(field=><TableCell key={field}>{editableRow[field]}</TableCell>)
-            }
+            {isEdit ? fieldsToDisplay.map(field=>
+             fieldInputMap[field]?.input 
+             ? <TableCell label={fieldInputMap[field].label}>
+                {fieldInputMap[field].input(handleChange,editableRow[field])} 
+               </TableCell> 
+             :<TableCell label={fieldInputMap[field].label}>
+                <TextField  key={field} inputProps={{readOnly:field==="lastLogin"}}
+                type=
+                {
+                fieldInputMap[field]?.type
+                ? fieldInputMap[field].type
+                :"text"
+                }
+                name={field}
+                onChange={event=>handleChange(event)}
+                value={editableRow[field]}
+                />
+              </TableCell>) //(End of inner IF - returns either textField or special component)
+                    : fieldsToDisplay.map(field=><TableCell label={fieldInputMap[field].label} key={field} scope="row">{editableRow[field]}</TableCell>)
+            } 
+            {/* End of outer IF (Returns row of inputs if it's edit mode, otherwise ordinary row) */}
             <TableCell>
                <IconButton onClick={isEdit ? ()=> handleSave() : ()=>setEdit(true)}>
                  {isEdit? <DoneIcon /> : <EditIcon />}
