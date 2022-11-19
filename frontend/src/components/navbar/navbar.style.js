@@ -1,11 +1,13 @@
 const navbar= {
     app:{
-        backgroundColor:"white",
+        backgroundColor:"#F4F4ED",
+        
     },
 
     toolbar:{
         display: "flex",
-        justifyContent:"space-between"
+        justifyContent:"space-between",
+        
     },
 
 

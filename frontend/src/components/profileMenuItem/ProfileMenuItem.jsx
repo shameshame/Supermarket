@@ -6,12 +6,15 @@ import labelLinkMap from "../../config/labelLinkMap.js"
 
 function ProfileMenuItem(props) {
     
-    const {icon,label} = props
+    const {icon,label,resetMenu} = props
     const TheIcon = icon
     const [logoutUser]=useLogoutUserMutation();
 
     function handleLogout(label){
-        if(label ==="Log Out") logoutUser();
+        if(label ==="Log Out") {
+           logoutUser();
+           resetMenu(undefined)
+        }
     }  
     
 

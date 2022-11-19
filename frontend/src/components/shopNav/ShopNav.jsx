@@ -6,9 +6,6 @@ import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import shopNavStyle from './shopNav.style';
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
 import Typography from '@mui/material/Typography';
 import Cart from "../cart/Cart"
 import {useSelector} from "react-redux"
@@ -19,13 +16,10 @@ import {useState} from "react"
 
 function ShopNav(props) {
     
-    const [value, setValue] = useState('1');
-    const [hover,setHover]=useState(false)
+    
     const cart = useSelector(state=>state.cart.cartItems)
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-     };
+    
     
     
     return (
@@ -33,7 +27,7 @@ function ShopNav(props) {
             <Grid sx={{backgroundColor:"primary.main"}}  item lg={8}>
               
               {["Food","Special offers","Cosmetics","Appliances"].map((item,index)=>
-                <Button  sx={shopNavStyle.tabs}   >{item}</Button>
+                <Button key={item}  sx={shopNavStyle.tabs}   >{item}</Button>
               )}
               
               

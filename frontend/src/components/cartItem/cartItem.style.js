@@ -3,16 +3,15 @@ const cartItemStyle = {
          border:1,
          borderColor:"#e0e0e0",
          marginBottom:"4px",
-         flex: 1
-        },
+         flex: 1,
+         position:"relative"
+      },
 
        deleteButton:{
           position:"absolute",
-          left:"10px",
-          bottom:"10px",
-          border:"solid 1px #e0e0e0",
-          borderRadius:"50%"
-       }
+          right:"10px",
+          top:"0",
+      }
         
 }
 

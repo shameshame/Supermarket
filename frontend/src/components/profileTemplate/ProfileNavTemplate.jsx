@@ -10,7 +10,7 @@ import {profilePaper} from "./profileTemplate.style"
 import profileMenu from "../../config/profileMenu.js"
 
 function ProfileNavTemplate(props) {
-    let  dropdownList=[]
+    
 
     const [anchorEl,setAnchorEl]=useState(undefined);
     const userMenuOpen=Boolean(anchorEl)
@@ -18,7 +18,7 @@ function ProfileNavTemplate(props) {
     const loggedIn=useSelector((state)=>state.user.loggedIn)
 
     function clickAccountIcon(event){
-          loggedIn?.name ? setAnchorEl(event.currentTarget):navigate("/login")
+          loggedIn? setAnchorEl(event.currentTarget):navigate("/login")
     }
     function handleClose(){
         setAnchorEl(undefined)
@@ -32,9 +32,9 @@ function ProfileNavTemplate(props) {
                         aria-haspopup ='true' 
                         aria-expanded={userMenuOpen ? "true":undefined}>
                  <AccountCircleIcon  />
-                  {loggedIn?.name? loggedIn.name: `Sign In`}
+                  {loggedIn?loggedIn.name: `Sign In`}
             </IconButton>
-            {anchorEl && loggedIn && <Menu open={userMenuOpen} 
+            {anchorEl  && <Menu open={userMenuOpen} 
               anchorEl={anchorEl} 
               id="account-menu" 
               MenuListProps={{"aria-labelledby":"account-button",}}
@@ -50,8 +50,11 @@ function ProfileNavTemplate(props) {
                   horizontal:"right"
               }}
             >
-                  {profileMenu[loggedIn?.role]?.map((item,index)=><ProfileMenuItem key={index} {...item}/>)}
+                  {profileMenu[loggedIn?.role]?.map((item,index)=><ProfileMenuItem key={index} {...item}
+                                                                    resetMenu={item.label==="Log Out" ? setAnchorEl :undefined}
+                                                                  />)}
             </Menu>}
+           
         </Box>
        
     );
