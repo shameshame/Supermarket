@@ -3,9 +3,10 @@ import storage from 'redux-persist/lib/storage';
 import { authApi } from './services/authApi';
 import { userApi } from './services/userApi';
 import { cartApi } from './services/cartApi';
+import { productApi } from './services/productApi';
 import { cartReducer } from "./features/cart/cartSlice";
 import authReducer from './features/auth/authSlice';
-import { productApi } from './services/productApi';
+
 import {
   persistStore,
   persistReducer,
@@ -30,6 +31,7 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [cartApi.reducerPath]: cartApi.reducer,
+    [productApi.reducerPath]: productApi.reducer,
     
     //Reducers to update state
     user: authReducer,

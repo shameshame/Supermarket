@@ -6,8 +6,10 @@ import {toast } from 'react-toastify';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import customValidationFields from "./customValidationFields.js"
+import ImageLoader from "../imageLoader/ImageLoader.jsx"
 import LoadingButton from '@mui/lab/LoadingButton'
 import formStyle from "./formTemplate.style.js";
+import fieldInputMap from "../../config/fieldInputMap.js"
 
 function FormTemplate(props) {
     
@@ -46,19 +48,23 @@ function FormTemplate(props) {
         formState: { errors,isSubmitSuccessful},
     } =methods;
 
-    // const {register}=useFormContext()
+    
     useEffect(() => {
         if (isSubmitSuccessful)  reset();
+        
     }, [isSubmitSuccessful]);
 
     useEffect(() => {
-        
         isSuccess? redirectIfSuccess():errorStack()
     }, [isLoading]);
+
+    
     
     
     const handleFormChange = (event) => {
-       setInputFields({...inputFields,[event.target.name]:event.target.value})
+       
+      setInputFields({...inputFields,[event.target.name]:event.target.value})
+      
     }
 
     return ( 
@@ -66,7 +72,12 @@ function FormTemplate(props) {
           <Container style={formStyle.general} component="form" onSubmit={handleSubmit(()=>submitHandler(inputFields))} maxWidth="xs">
             <Typography style={formStyle.title} variant="h4">{formTitle}</Typography>
            {fieldsToFill?.map((field,index)=>
-           <TextField style={formStyle.textField} fullWidth key={index} type={field.type} label={field.label} 
+             field.name==="image" 
+                ? <ImageLoader key={index} state={inputFields} setState={setInputFields}
+                  /> :
+               (fieldInputMap[field.name]?.input 
+               ? fieldInputMap[field.name].input(handleFormChange,inputFields[field.name]) 
+               :<TextField style={formStyle.textField} fullWidth key={index} type={field.type} label={field.label} 
                     {...register(field.name, {required:`${field.name} is required`,
                                          pattern:field.pattern,
                                          // Check if you  can change this line by passing useFormContext
@@ -78,14 +89,16 @@ function FormTemplate(props) {
                      } 
                      variant="outlined"  autoFocus={!index} error={!!errors?.[field.name]}
                      helperText={errors?.[field.name]? errors[field.name].message : null} 
-            />
+               />)
+            
             )}
              
-            <LoadingButton fullWidth style={formStyle.loadingButton} type="submit"  loading={isLoading} variant="contained" color="primary" >
+            <LoadingButton  fullWidth style={formStyle.loadingButton} type="submit"  loading={isLoading} variant="contained" color="primary" >
                 {buttonText}
            </LoadingButton> 
           
         </Container>
+      
        
         </FormProvider>
     );

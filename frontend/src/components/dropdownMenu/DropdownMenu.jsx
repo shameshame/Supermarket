@@ -3,17 +3,19 @@ import  MenuItem  from "@mui/material/MenuItem";
 
 
 function DropdownMenu(props) {
-    const {options,handleChange,currentValue}=props
+    const {options,handleChange,current,name}=props
 
     return (
         <Select
-           name={props.name}
+           fullWidth
+           name={name}
            id="demo-simple-select"
-           value={currentValue || ''}
+           value={current}
            label="Choose option"
-           onChange={handleChange}
+           onChange={event=>handleChange(event)}
+           sx={{mb:2}}
         >
-        {options.map((option,index)=><MenuItem key={index} value={option}>{option}</MenuItem>)}
+        {options.map((option)=><MenuItem  key={option} value={option}>{option}</MenuItem>)}
       </Select>
     );
 }

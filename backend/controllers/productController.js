@@ -7,7 +7,6 @@ const addNewProduct = asyncHandler(async(req,res)=>{
     const response  = await  cloudinary.v2.uploader.upload(file, {
         public_id:filename,
         overwrite:false,
-        
     });
 
     let created= await Product.create({...rest,image:response.secure_url})

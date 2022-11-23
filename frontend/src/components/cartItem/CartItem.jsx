@@ -26,9 +26,7 @@ function CartItem(props) {
 
     const onIncrement= ()=>{
         dispatch(addToCart({_id,quantity:1}))
-        
         increment()
-       
     }
 
     const onDecrement = ()=>{

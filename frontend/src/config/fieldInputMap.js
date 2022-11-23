@@ -1,5 +1,7 @@
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem'
+import DropdownMenu from "../components/dropdownMenu/DropdownMenu.jsx"
+import {categories} from "../js/categories.js"
 
 
 const fieldInputMap={
@@ -11,23 +13,35 @@ const fieldInputMap={
                      <MenuItem value={"Storekeeper"}>Storekeeper</MenuItem>
                   </Select>,
 
-           label:"Role"
+            label:"Role"
           },
     
-        name:{
-          label:"Name"
+    name:{
+      label:"Name"
 
-        },
+    },
 
-        email:{
-          label:"E-mail"
-        },
+    email:{
+      label:"E-mail"
+    },
 
-        lastLogin:{
-          label:"Last Seen"
-        }
+    lastLogin:{
+      label:"Last Seen"
+    },
 
+    category:{
+      label:"Category",
+      input:(handleChange,current="Dairy")=> 
+             <DropdownMenu name="category" label="Category" handleChange={handleChange} current={current} options={categories}/>
+    },
 
-        }
+    image:{
+
+    }
+
+    
+        
+  
+  }
 
 export default fieldInputMap

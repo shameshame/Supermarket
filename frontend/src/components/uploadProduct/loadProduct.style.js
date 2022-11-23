@@ -2,7 +2,8 @@ const newProductForm = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop:"150px"
 
 }
 
