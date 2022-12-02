@@ -74,8 +74,10 @@ function FormTemplate(props) {
            {fieldsToFill?.map((field,index)=>
              field.name==="image" 
                 ? <ImageLoader key={index} state={inputFields} setState={setInputFields}
-                  /> :
-               (fieldInputMap[field.name]?.input 
+                  /> 
+                :
+                  
+                (fieldInputMap[field.name]?.input 
                ? fieldInputMap[field.name].input(handleFormChange,inputFields[field.name]) 
                :<TextField style={formStyle.textField} fullWidth key={index} type={field.type} label={field.label} 
                     {...register(field.name, {required:`${field.name} is required`,

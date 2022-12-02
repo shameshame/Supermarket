@@ -8,6 +8,7 @@ import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux"
 import {profilePaper} from "./profileTemplate.style"
 import profileMenu from "../../config/profileMenu.js"
+import Stack from '@mui/material/Stack';
 
 function ProfileNavTemplate(props) {
     
@@ -26,13 +27,15 @@ function ProfileNavTemplate(props) {
 
     return (
         <Box >
-            <IconButton id="account-button" 
+            <IconButton sx={{color:"#392F5A"}} id="account-button" 
                         
                         onClick={(event)=>clickAccountIcon(event)}
                         aria-haspopup ='true' 
                         aria-expanded={userMenuOpen ? "true":undefined}>
-                 <AccountCircleIcon  />
+                
+                  <AccountCircleIcon  />
                   {loggedIn?loggedIn.name: `Sign In`}
+                 
             </IconButton>
             {anchorEl  && <Menu open={userMenuOpen} 
               anchorEl={anchorEl} 
@@ -47,7 +50,7 @@ function ProfileNavTemplate(props) {
 
               transformOrigin={{
                   vertical:"top",
-                  horizontal:"right"
+                  horizontal:"left"
               }}
             >
                   {profileMenu[loggedIn?.role]?.map((item,index)=><ProfileMenuItem key={index} {...item}

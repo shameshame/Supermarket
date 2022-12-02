@@ -8,6 +8,7 @@ import Box from '@mui/material/Box'
 import ShopNav from "../shopNav/ShopNav.jsx"
 import useMediaQuery from '@mui/material/useMediaQuery';
 import {createTheme} from "@mui/material/styles"
+import Divider from '@mui/material/Divider';
 
 function ShopCounter(props) {
     const {queryString}=props
@@ -31,14 +32,17 @@ function ShopCounter(props) {
     
     return( <Box>
               {!isMobile && <ShopNav/>}
-              <Grid    style={shopCounter}  container  >
+              <Grid    style={shopCounter.general}  container  >
                  <Grid item lg={expanded?8:12}>
-                   <Grid  container spacing={3}>{products?.map(product=>
-                            <Grid key={product._id} item lg={4}>
+                   <Grid style={shopCounter.row}  container spacing={isMobile?3:0}>{products?.map(product=>
+                            <Grid key={product._id} item xs={12} lg={4}>
                                <InventoryItem  {...product}/>
+                               {!isMobile && <Divider/>}
                             </Grid> )}
                     </Grid>
+                    
                   </Grid> 
+                  
                </Grid>
             </Box>
     );          

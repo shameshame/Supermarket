@@ -2,7 +2,7 @@ const shopNavStyle={
     general:{
         position: 'fixed',
         top:"-5px",
-        marginTop:"70px",
+        marginTop:"65px",
         zIndex: 2,
        
         color:"#392F5A"

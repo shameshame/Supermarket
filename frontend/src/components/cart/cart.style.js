@@ -2,14 +2,15 @@ const cartStyle={
    general:{
     overflowY:"scroll",
     position:"relative",
-    top:"-7rem",
+    top:"0",
     
-   }, 
+  }, 
 
    accordion:{
     position:"fixed",
-    top:"150px",
-    backgroundColor:"transparent"
+    top:"10%",
+    backgroundColor:"transparent",
+    
    },
    
    iconButton:{
@@ -20,7 +21,8 @@ const cartStyle={
    bagIcon:{
      color:"#e6e6e6",
      width:"25.5rem",
-     height:"200px"
+     height:"300px",
+     
    },
 
    cartButton:{
@@ -36,24 +38,28 @@ const cartStyle={
     borderRadius:"1.5rem",
     marginRight:"5rem"
    },
+   accordionSummary:{
+    backgroundColor:"#e6e6e6",
+    borderRadius:"16px"
+   },
 
    expanded:{
-     transform:"translateY(60vh)",
+     transform:"translateY(65vh)",
      transition:"linear 300ms",
-    
+     
    },
 
    hidden:{
-    transform:"translateY(-1.2rem)",
+    transform:"translateY(67%)",
     transition:"linear 300ms",
-    backgroundColor:"#e6e6e6",
-    
     
    },
 
+   
+
    emptyCart:{
-      width:"100px",
-      height:"100px"
+      width:"100%",
+      // height:"100px"
    }
    
 } 

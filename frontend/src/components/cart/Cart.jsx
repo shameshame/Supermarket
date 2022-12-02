@@ -9,12 +9,17 @@ import {toggleCart} from '../../redux/features/cart/cartSlice';
 import cartStyle from "./cart.style"
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
+import  AccordionDetails  from '@mui/material/AccordionDetails';
+
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ShoppingCartSharpIcon from '@mui/icons-material/ShoppingCartSharp';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { totalItems,totalPrice } from '../../js/orderSummary.js';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import {createTheme} from "@mui/material/styles"
+import { styled } from '@mui/material/styles';
+
+
 
 
 export const SendOrderButton = ()=> {
@@ -23,7 +28,7 @@ export const SendOrderButton = ()=> {
   let itemsInCart=totalItems(cart)
   let priceInTotal=totalPrice(cart)
   const theme=createTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
   
   return (<Button fullWidth={isMobile} style={cartStyle.sendOrderButton} 
            onClick={()=>trigger({cart,totalItems:itemsInCart,
@@ -36,15 +41,19 @@ export const SendOrderButton = ()=> {
 
 export const CartContent=()=>{
   const cart = useSelector(state=>state.cart.cartItems)
+  const theme=createTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
+
+  
 
   return (
-    <Box>
+    <Box  >
        {!cart.length 
           ?<Box >
-            <LocalMallIcon style={cartStyle.bagIcon} />
+            <LocalMallIcon  style={cartStyle.bagIcon} />
             <Typography sx={{textAlign:"center"}} paragraph>Let's start shopping,buddy...</Typography>
            </Box>          
-        :<Box style={cartStyle.general}>
+        :<Box   style={!isMobile?cartStyle.general:null}>
                        {/* Key collision if 2 items of the same product are in the cart */}
             {cart.map(item=><CartItem  key={item._id} {...item}/>)}
           </Box>}
@@ -72,20 +81,27 @@ export default function Cart(props) {
     
     
     return (
-      <Accordion  sx={cartStyle.accordion} expanded={expanded}  elevation={0}>
+      
+      <Accordion defaultExpanded   sx={{...cartStyle.accordion}} expanded={expanded}  elevation={0}>
           
         <AccordionSummary 
            expandIcon={<ExpandMoreIcon onClick={()=>dispatch(toggleCart(!expanded))}/>}
            aria-controls="panel1a-content"
-           style={expanded?cartStyle.expanded:cartStyle.hidden}
+           sx={cartStyle.accordionSummary}
+           style={
+            expanded?cartStyle.expanded:cartStyle.hidden}
            id="panel1a-header"
+           
         >
+          <AccordionDetails >
             <SendOrderButton/>
             <CartButton/>
+          </AccordionDetails>
         </AccordionSummary>
         <CartContent/>
       </Accordion>
-       
+     
+      
     );
 }
 

@@ -33,23 +33,25 @@ function ShopNav(props) {
               
             </Grid>
             <Grid style={shopNavStyle.cartHeadline}  item lg={4}>
+               
                 <Typography variant="p">  My Cart</Typography>
                 {cart.length>0 && <Stack direction="row">
                    <IconButton style={shopNavStyle.iconButton}>
                      <SaveAltIcon sx={{fontSize:"2rem"}}/>
-                     {/* <Typography paragraph>Save Cart</Typography> */}
-                   </IconButton>
+                    </IconButton>
                    <IconButton style={shopNavStyle.iconButton}>
-                    <DeleteIcon sx={{fontSize:"2rem"}}/>
-                    {/* <Typography paragraph>Empty Cart</Typography> */}
-                   </IconButton>
+                     <DeleteIcon sx={{fontSize:"2rem"}}/>
+                    </IconButton>
                 </Stack>}
-                <Cart />
+                <Cart/>
+               
+                </Grid>
+                
             
            </Grid>
            
             
-        </Grid>
+       
     );
 }
 

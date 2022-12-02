@@ -1,3 +1,4 @@
+import './App.css';
 import {BrowserRouter,Routes,Route} from "react-router-dom";
 import Navbar from './components/navbar/Navbar'
 import LoadProduct from "./components/uploadProduct/LoadProduct";
@@ -9,14 +10,13 @@ import AdminProfile from "./components/adminProfile/AdminProfile.jsx"
 import Unauthorized from "./components/unauthorizedPage/Unauthorized.jsx"
 import MyOrders from "./components/myOrders/MyOrders.jsx"
 import UserList from "./components/userList/UserList";
-
 import ShopCounter from "./components/shopCounter/ShopCounter.jsx"
 import "../src/components/userList/UserList.css"
 
 function App() {
   
   
-  return (<BrowserRouter>
+  return (<BrowserRouter >
              <Navbar/>
              <Routes>
                 <Route path="/">

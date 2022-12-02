@@ -10,7 +10,8 @@ import amber from "@mui/material/colors/amber"
 import Stack from '@mui/material/Stack';
 import {useState} from "react"
 import useMediaQuery from '@mui/material/useMediaQuery';
-import {createTheme} from "@mui/material/styles"
+import {createTheme} from "@mui/material/styles";
+import Card from '@mui/material/Card'
 
 
 
@@ -24,12 +25,12 @@ function InventoryItem(props) {
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     
    return (
-        <Box sx={inventoryItemStyle.general} onMouseOver={()=>setHover(true)} onMouseOut={()=>setHover(false)} border={1} >
+        <Box sx={inventoryItemStyle.general} onMouseOver={()=>setHover(true)} onMouseOut={()=>setHover(false)}  >
            <Product {...props}/>
            {(hover || isMobile) && <Stack direction={isMobile ?"column":"row"}>
            
              <Counter count={count} decrement={decrement} increment={increment}/> 
-             <Button  sx={{px:3}} variant="contained" onClick={()=>dispatch(addToCart({image,quantity:count,...propsForCart}))} color="error">ADD</Button>
+             <Button variant="contained" onClick={()=>dispatch(addToCart({image,quantity:count,...propsForCart}))} style={inventoryItemStyle.addItem}>ADD</Button>
              </Stack>  
             }
            

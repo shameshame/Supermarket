@@ -5,7 +5,7 @@ const countStyle={
     },
 
     countWithBorder:{
-      border:"solid 1px #000"
+      border:"solid 1px #392F5A"
     },
 
     countNoBorder:{

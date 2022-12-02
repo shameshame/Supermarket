@@ -15,13 +15,14 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import useCounter from "../../customHooks/useCounter"
 import Counter from '../counter/Counter.jsx';
 import {addToCart,removeFromCart,removeSingleItem} from '../../redux/features/cart/cartSlice';
+import Container from '@mui/material/Container'
 
 function CartItem(props) {
     const {_id,price,description,quantity,image}=props
     const [hover,setHover]=useState(false);
     const dispatch=useDispatch()
     const theme=createTheme()
-    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+    const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
     const [count, increment, decrement]=useCounter(quantity,1)
 
     const onIncrement= ()=>{
@@ -37,14 +38,15 @@ function CartItem(props) {
 
     
     return (
-        <Card style={cartItemStyle.general}>
-           <Grid container alignItems="center" onMouseOver={()=>setHover(true)} 
+        
+        <Card  style={cartItemStyle.general}>
+           <Grid   container alignItems="center" onMouseOver={()=>setHover(true)} 
                  onMouseOut={()=>setHover(false)} 
-                  columnSpacing={2}
+                 columnSpacing={isMobile?2:1}
             >
             <Grid item xs={3} lg={2}><CardMedia  component="img" image={image}/></Grid>
             <Grid item xs={2} lg={6}>
-              <CardContent> <Typography paragraph>{description}</Typography></CardContent>
+              <CardContent > <Typography paragraph>{description}</Typography></CardContent>
            </Grid>
            {isMobile && <Grid item xs={5}>
               <Counter noBorder count={quantity} decrement={onDecrement} increment={onIncrement}/>
@@ -55,6 +57,7 @@ function CartItem(props) {
         </Grid>
           
         </Card>
+        
        
     );
 }
