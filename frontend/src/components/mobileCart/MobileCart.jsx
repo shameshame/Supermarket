@@ -25,9 +25,9 @@ function MobileCart(props) {
             <CartButton/>
             </IconButton>
          {openCart &&
-              <Box sx={mobileCartStyle}> 
-                <CartContent/>
-                <SendOrderButton/>
+              <Box sx={mobileCartStyle.general}> 
+                 <CartContent />
+                 <SendOrderButton />
               </Box>
           } 
           </Box>

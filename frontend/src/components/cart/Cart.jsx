@@ -10,14 +10,14 @@ import cartStyle from "./cart.style"
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import  AccordionDetails  from '@mui/material/AccordionDetails';
-
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ShoppingCartSharpIcon from '@mui/icons-material/ShoppingCartSharp';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { totalItems,totalPrice } from '../../js/orderSummary.js';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import {createTheme} from "@mui/material/styles"
-import { styled } from '@mui/material/styles';
+import ScrollToBottom from 'react-scroll-to-bottom';
+import mobileCartStyle from '../mobileCart/mobileCart.style.js';
 
 
 
@@ -29,8 +29,13 @@ export const SendOrderButton = ()=> {
   let priceInTotal=totalPrice(cart)
   const theme=createTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
+
+  const generalPlusMobileStyle = {...cartStyle.sendOrderButton,
+                                  ...mobileCartStyle.orderButton
+                                 }
   
-  return (<Button fullWidth={isMobile} style={cartStyle.sendOrderButton} 
+  return (<Button fullWidth={isMobile} 
+           style={isMobile?generalPlusMobileStyle:cartStyle.sendOrderButton} 
            onClick={()=>trigger({cart,totalItems:itemsInCart,
                                  totalPrice:priceInTotal})}
           >
@@ -52,11 +57,14 @@ export const CartContent=()=>{
           ?<Box >
             <LocalMallIcon  style={cartStyle.bagIcon} />
             <Typography sx={{textAlign:"center"}} paragraph>Let's start shopping,buddy...</Typography>
-           </Box>          
-        :<Box   style={!isMobile?cartStyle.general:null}>
+           </Box>
+                    
+        :<ScrollToBottom><Box   style={!isMobile?cartStyle.general:mobileCartStyle.cartContent}>
                        {/* Key collision if 2 items of the same product are in the cart */}
             {cart.map(item=><CartItem  key={item._id} {...item}/>)}
-          </Box>}
+          </Box>
+          </ScrollToBottom>
+        }
     
     </Box>
   )
@@ -82,7 +90,7 @@ export default function Cart(props) {
     
     return (
       
-      <Accordion defaultExpanded   sx={{...cartStyle.accordion}} expanded={expanded}  elevation={0}>
+      <Accordion    sx={{...cartStyle.accordion}} expanded={expanded}  elevation={0}>
           
         <AccordionSummary 
            expandIcon={<ExpandMoreIcon onClick={()=>dispatch(toggleCart(!expanded))}/>}

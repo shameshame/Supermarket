@@ -31,7 +31,6 @@ function CartItem(props) {
     }
 
     const onDecrement = ()=>{
-        
         dispatch(removeSingleItem(_id))
         decrement()
     }
@@ -42,7 +41,7 @@ function CartItem(props) {
         <Card  style={cartItemStyle.general}>
            <Grid   container alignItems="center" onMouseOver={()=>setHover(true)} 
                  onMouseOut={()=>setHover(false)} 
-                 columnSpacing={isMobile?2:1}
+                 columnSpacing={1}
             >
             <Grid item xs={3} lg={2}><CardMedia  component="img" image={image}/></Grid>
             <Grid item xs={2} lg={6}>

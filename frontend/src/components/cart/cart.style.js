@@ -1,6 +1,6 @@
 const cartStyle={
    general:{
-    overflowY:"scroll",
+    height:"300px",
     position:"relative",
     top:"0",
     
