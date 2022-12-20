@@ -37,7 +37,6 @@ const cartSlice=createSlice({
 
         emptyCart:(state)=>{
           state.cartItems=[];
-          state.expanded=false;
         }
     }
 

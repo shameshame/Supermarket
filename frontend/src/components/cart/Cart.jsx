@@ -19,6 +19,7 @@ import {createTheme} from "@mui/material/styles"
 import ScrollToBottom from 'react-scroll-to-bottom';
 import mobileCartStyle from '../mobileCart/mobileCart.style.js';
 import { useNavigate } from "react-router-dom";
+import Fab from '@mui/material/Fab';
 
 
 
@@ -31,8 +32,8 @@ export const CartContent=()=>{
     <Box  >
        {!cart.length 
           ?<Box >
-            <LocalMallIcon  style={cartStyle.bagIcon} />
-            <Typography sx={{textAlign:"center"}} paragraph>Let's start shopping,buddy...</Typography>
+            <Typography sx={cartStyle.emptyCartHeadline} paragraph>Your tasty dinner starts here...</Typography>
+            <LocalMallIcon  sx={cartStyle.bagIcon} />
            </Box>
                     
         :<ScrollToBottom>
@@ -59,6 +60,7 @@ export const CartButton = ()=>{
 
 export const CheckOutButton =({setOpenCart})=>{
   const cart = useSelector(state=>state.cart.cartItems)
+  const cartIsEmpty = cart.length===0
   const navigate = useNavigate()
   const theme=createTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
@@ -73,6 +75,7 @@ export const CheckOutButton =({setOpenCart})=>{
   }
   
   return <Button
+           disabled={cartIsEmpty}
            fullWidth={isMobile} 
            onClick={()=> toOrderSummary()}
            style={isMobile?generalPlusMobileStyle:cartStyle.checkOutButton}

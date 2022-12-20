@@ -35,11 +35,11 @@ function ShopNav(props) {
                
                 <Typography variant="p">  My Cart</Typography>
                 {cart.length>0 && <Stack direction="row">
-                   <IconButton style={shopNavStyle.iconButton}>
+                   <IconButton  style={shopNavStyle.iconButton}>
                      <SaveAltIcon sx={{fontSize:"2rem"}}/>
                     </IconButton>
-                   <IconButton onClick={()=>dispatch(emptyCart())} style={shopNavStyle.iconButton}>
-                     <DeleteIcon sx={{fontSize:"2rem"}}/>
+                   <IconButton onClick={()=>dispatch(emptyCart())}  style={shopNavStyle.iconButton}>
+                     <DeleteIcon  sx={{fontSize:"2rem"}}/>
                     </IconButton>
                 </Stack>}
                 <Cart/>

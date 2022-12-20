@@ -4,7 +4,7 @@ const labelLinkMap ={
     "New Product":"/new_product",
     "User List":"/admin/user_list",
     "Restock":"/restock",
-    "My Orders":"my_orders",
+    "My Orders":"/customer/my_orders",
     "My Credit Card":"/cards"
 }
 

@@ -3,7 +3,7 @@ const shopNavStyle={
         position: 'fixed',
         top:"-5px",
         marginTop:"65px",
-        zIndex: 2,
+        zIndex: 4,
        
         color:"#392F5A"
     },
@@ -20,7 +20,8 @@ const shopNavStyle={
 
     iconButton:{
         color:"#EEEEEE",
-        fontSize:"2rem"
+        fontSize:"2rem",
+        padding:"1rem"
     },
 
     category:{

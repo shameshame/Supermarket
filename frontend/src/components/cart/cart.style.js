@@ -12,6 +12,8 @@ const cartStyle={
     backgroundColor:"transparent",
     
    },
+
+   
    
    iconButton:{
     color:"#392F5A",
@@ -54,7 +56,7 @@ const cartStyle={
    },
 
    expanded:{
-     transform:"translateY(65vh)",
+     transform:"translateY(71vh)",
      transition:"linear 300ms",
      
    },
@@ -70,6 +72,15 @@ const cartStyle={
    emptyCart:{
       width:"100%",
       // height:"100px"
+   },
+
+   emptyCartHeadline:{
+    textAlign:"center",
+    fontSize:"1.5rem",
+    zIndex:3,
+    position:"relative",
+    top:"10rem",
+    transform:"rotateZ(-35deg)"
    }
    
 } 
