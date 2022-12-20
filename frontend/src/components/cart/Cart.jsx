@@ -18,38 +18,14 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import {createTheme} from "@mui/material/styles"
 import ScrollToBottom from 'react-scroll-to-bottom';
 import mobileCartStyle from '../mobileCart/mobileCart.style.js';
+import { useNavigate } from "react-router-dom";
 
 
-
-
-export const SendOrderButton = ()=> {
-  const cart = useSelector(state=>state.cart.cartItems)
-  const [trigger,result]=useSendOrderMutation()
-  let itemsInCart=totalItems(cart)
-  let priceInTotal=totalPrice(cart)
-  const theme=createTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
-
-  const generalPlusMobileStyle = {...cartStyle.sendOrderButton,
-                                  ...mobileCartStyle.orderButton
-                                 }
-  
-  return (<Button fullWidth={isMobile} 
-           style={isMobile?generalPlusMobileStyle:cartStyle.sendOrderButton} 
-           onClick={()=>trigger({cart,totalItems:itemsInCart,
-                                 totalPrice:priceInTotal})}
-          >
-              Charge:${priceInTotal.toFixed(2)}
-          </Button>)
-
-}
 
 export const CartContent=()=>{
   const cart = useSelector(state=>state.cart.cartItems)
   const theme=createTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
-
-  
 
   return (
     <Box  >
@@ -59,8 +35,8 @@ export const CartContent=()=>{
             <Typography sx={{textAlign:"center"}} paragraph>Let's start shopping,buddy...</Typography>
            </Box>
                     
-        :<ScrollToBottom><Box   style={!isMobile?cartStyle.general:mobileCartStyle.cartContent}>
-                       {/* Key collision if 2 items of the same product are in the cart */}
+        :<ScrollToBottom>
+          <Box   style={!isMobile?cartStyle.general:mobileCartStyle.cartContent}>
             {cart.map(item=><CartItem  key={item._id} {...item}/>)}
           </Box>
           </ScrollToBottom>
@@ -79,6 +55,30 @@ export const CartButton = ()=>{
               <ShoppingCartSharpIcon style={cartStyle.cartButton} />
             </Badge>
           )
+}
+
+export const CheckOutButton =({setOpenCart})=>{
+  const cart = useSelector(state=>state.cart.cartItems)
+  const navigate = useNavigate()
+  const theme=createTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
+
+  const generalPlusMobileStyle = {...cartStyle.checkOutButton,
+    ...mobileCartStyle.checkOutButton
+  }
+
+  const toOrderSummary=()=>{
+    if(isMobile)setOpenCart(false)
+    navigate("/customer/check_out",{ state: {products: cart } })
+  }
+  
+  return <Button
+           fullWidth={isMobile} 
+           onClick={()=> toOrderSummary()}
+           style={isMobile?generalPlusMobileStyle:cartStyle.checkOutButton}
+         >
+            Check Out
+         </Button>
 }
 
 
@@ -102,7 +102,7 @@ export default function Cart(props) {
            
         >
           <AccordionDetails >
-            <SendOrderButton/>
+            <CheckOutButton/>
             <CartButton/>
           </AccordionDetails>
         </AccordionSummary>

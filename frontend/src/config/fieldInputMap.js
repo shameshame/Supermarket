@@ -7,6 +7,8 @@ import {categories} from "../js/categories.js"
 const fieldInputMap={
     role:{ 
             input:(handleChange,option)=> 
+                   
+                   //Replace it with DropdownMenu component
                    <Select label="Role" name="role" value={option} onChange={(event)=>handleChange(event)}>
                      <MenuItem value={"Customer"}>Customer</MenuItem>
                      <MenuItem value={"Admin"}>Admin</MenuItem>
@@ -37,6 +39,17 @@ const fieldInputMap={
 
     image:{
 
+    },
+
+    _id:{
+      label:"Code"
+    },
+    date:{
+      label:"Date"
+    },
+
+    status:{
+      label:"Status"
     }
 
     

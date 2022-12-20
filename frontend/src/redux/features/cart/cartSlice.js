@@ -35,7 +35,10 @@ const cartSlice=createSlice({
            state.expanded=action.payload
         },
 
-        emptyCart:()=>initialState
+        emptyCart:(state)=>{
+          state.cartItems=[];
+          state.expanded=false;
+        }
     }
 
 })

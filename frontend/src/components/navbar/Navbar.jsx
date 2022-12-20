@@ -69,7 +69,8 @@ function Navbar(props) {
                   >
                     <SearchIcon />
                   </Fab>}
-                  {displaySearch && <TextField fullWidth style={navbar.searchFieldMobile}   placeholder="Enter category or name" sx={{mt:2}}/>}
+                  {displaySearch && <TextField fullWidth style={navbar.searchFieldMobile}   placeholder="Enter category or name" sx={{mt:2}}/>
+                }
         </Box>
 
        

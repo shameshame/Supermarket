@@ -11,7 +11,8 @@ import Unauthorized from "./components/unauthorizedPage/Unauthorized.jsx"
 import MyOrders from "./components/myOrders/MyOrders.jsx"
 import UserList from "./components/userList/UserList";
 import ShopCounter from "./components/shopCounter/ShopCounter.jsx"
-import "../src/components/userList/UserList.css"
+import OrderDetails from './components/orderDetails/OrderDetails';
+// import "../src/components/userList/UserList.css"
 
 function App() {
   
@@ -29,6 +30,8 @@ function App() {
                   <Route path="/customer"  element={<ProtectedRoute allowedRoles={["Customer","Admin"]}/>}>
                     <Route path="/customer"  element={<CustomerProfile/>}/>
                     <Route path="my_orders" element={<MyOrders/>}/>
+                    <Route path="check_out" element={<OrderDetails/>}/>
+                    <Route path="my_orders/order_details" element={<OrderDetails/>}/>
                   </Route>
                   
                   

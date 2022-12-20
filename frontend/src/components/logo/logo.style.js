@@ -11,14 +11,11 @@ const logo = {
     ownerName:{
         color:"#E52210",
         textDecoration:"none",
-        
-        
     },
 
     restOfBrand:{
         textDecoration:"none",
         color:"primary",
-        
     },
 }
 

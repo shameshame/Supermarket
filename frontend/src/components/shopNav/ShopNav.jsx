@@ -1,23 +1,22 @@
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
 import shopNavStyle from './shopNav.style';
 import Typography from '@mui/material/Typography';
 import Cart from "../cart/Cart"
-import {useSelector} from "react-redux"
+import {useSelector,useDispatch} from "react-redux"
 import Button from "@mui/material/Button"
+import {emptyCart} from '../../redux/features/cart/cartSlice';
 
-import {useState} from "react"
 
 
 function ShopNav(props) {
     
     
     const cart = useSelector(state=>state.cart.cartItems)
+    const dispatch= useDispatch()
 
     
     
@@ -39,7 +38,7 @@ function ShopNav(props) {
                    <IconButton style={shopNavStyle.iconButton}>
                      <SaveAltIcon sx={{fontSize:"2rem"}}/>
                     </IconButton>
-                   <IconButton style={shopNavStyle.iconButton}>
+                   <IconButton onClick={()=>dispatch(emptyCart())} style={shopNavStyle.iconButton}>
                      <DeleteIcon sx={{fontSize:"2rem"}}/>
                     </IconButton>
                 </Stack>}

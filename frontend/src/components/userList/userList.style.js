@@ -5,7 +5,14 @@ const userListStyle={
         height:"100vh",
         display: "flex",
         flexDirection:"column",
-        justifyContent:"center"
+        justifyContent:"center",
+
+        '& .MuiTableCellRoot::before':{
+            content: 'attr(label)',
+            fontWeight: "bold",
+            width: "100px",
+            minWidth: "100px"
+        }
        
     },
 

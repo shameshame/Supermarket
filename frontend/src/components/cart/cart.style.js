@@ -38,6 +38,16 @@ const cartStyle={
     borderRadius:"1.5rem",
     marginRight:"5rem"
    },
+   
+   checkOutButton:{
+    backgroundColor:"#E52210",
+    color:"white",
+    padding:"10px 20px",
+    borderRadius:"1.5rem",
+    marginRight:"5rem"
+   
+   },
+   
    accordionSummary:{
     backgroundColor:"#e6e6e6",
     borderRadius:"16px"

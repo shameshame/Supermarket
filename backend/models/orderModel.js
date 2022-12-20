@@ -17,7 +17,7 @@ const orderSchema = mongoose.Schema({
         type: Number
     },
 
-    status:{type:String,enum:["pending","closed"]},
+    status:{type:String,enum:["Pending","Completed"]},
 },{
     timestamps: true,
     toJSON:{virtuals:true},

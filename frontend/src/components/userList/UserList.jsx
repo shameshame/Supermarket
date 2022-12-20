@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
 import userListStyle from './userList.style';
+import "./UserList.css"
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,7 +9,6 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import userApi from "../../redux/services/userApi"
-import CircularProgress from '@mui/material/CircularProgress'
 import EditableRow from '../editableRow/EditableRow';
 import {useState,useEffect} from "react"
 import Alert from '@mui/material/Alert';
@@ -40,9 +40,7 @@ function UserList(props) {
         if (reason === "clickaway") {
             return;
         }
-
-        
-        setTable({...table,[alert]:false});
+         setTable({...table,[alert]:false});
     };
     
     const handleChangePage = (event, newPage) => {

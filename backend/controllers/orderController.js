@@ -18,7 +18,7 @@ const createOrder=asyncHandler(async(req,res)=>{
         Order.verifyData(cart,totalItems,totalPrice)
         await Order.enoughItemsInStock(cart,session)
         await Order.loadCartItems(cart,orderId,session)
-        await Order.create([{owner : req.user._id,_id:orderId,totalPrice}],{session})
+        await Order.create([{owner : req.user._id,_id:orderId,totalPrice,status:"Completed"}],{session})
         res.status(201).json({message:"Order has been sent successfully"}) 
       })
    }catch (error) {
@@ -32,7 +32,7 @@ const createOrder=asyncHandler(async(req,res)=>{
 
 const getMyOrders=asyncHandler(async(req,res)=>{
     match={}
-    match.status=req.query.status
+    // match.status=req.query.status
 
     await req.user.populate({path: "orders",
         populate:{

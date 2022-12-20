@@ -1,6 +1,6 @@
 import {useState} from "react"
 import IconButton from '@mui/material/IconButton';
-import {CartButton,CartContent,SendOrderButton} from "../cart/Cart.jsx"
+import {CartButton,CartContent,CheckOutButton} from "../cart/Cart.jsx"
 import Collapse from '@mui/material/Collapse';
 import Drawer from "@mui/material/Drawer"
 import Menu from '@mui/material/Menu'
@@ -12,7 +12,7 @@ import mobileCartStyle from "./mobileCart.style"
 
 function MobileCart(props) {
     const [openCart,setOpenCart]=useState(false);
-   
+    
 
     
     
@@ -27,7 +27,7 @@ function MobileCart(props) {
          {openCart &&
               <Box sx={mobileCartStyle.general}> 
                  <CartContent />
-                 <SendOrderButton />
+                 <CheckOutButton setOpenCart={setOpenCart}/>
               </Box>
           } 
           </Box>

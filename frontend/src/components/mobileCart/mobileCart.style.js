@@ -14,10 +14,9 @@ const mobileCartStyle = {
   },
    
    
-   orderButton:{
+   checkOutButton:{
       position:"fixed",
       bottom:"0"
-
    }
 
 }
