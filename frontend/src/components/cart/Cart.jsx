@@ -31,9 +31,9 @@ export const CartContent=()=>{
   return (
     <Box  >
        {!cart.length 
-          ?<Box >
+          ?<Box sx={cartStyle.emptyCart}>
             <Typography sx={cartStyle.emptyCartHeadline} paragraph>Your tasty dinner starts here...</Typography>
-            <LocalMallIcon  sx={cartStyle.bagIcon} />
+            <LocalMallIcon fontSize="large"  sx={cartStyle.bagIcon} />
            </Box>
                     
         :<ScrollToBottom>

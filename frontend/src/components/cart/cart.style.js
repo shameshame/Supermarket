@@ -22,9 +22,11 @@ const cartStyle={
 
    bagIcon:{
      color:"#e6e6e6",
-     width:"25.5rem",
-     height:"300px",
-     
+     width:"28rem",
+     height:"250px",
+    //  transform:"translate(400%,200%) scale(9.5)"
+
+
    },
 
    cartButton:{
@@ -56,7 +58,7 @@ const cartStyle={
    },
 
    expanded:{
-     transform:"translateY(71vh)",
+     transform:"translateY(72vh)",
      transition:"linear 300ms",
      
    },
@@ -64,22 +66,22 @@ const cartStyle={
    hidden:{
     transform:"translateY(67%)",
     transition:"linear 300ms",
-    
-   },
-
-   
+  },
 
    emptyCart:{
-      width:"100%",
-      // height:"100px"
+    display:"flex",
+    flexDirection:"column",
+    justifyContent:"center",
+    alignItems:"center"
    },
 
    emptyCartHeadline:{
-    textAlign:"center",
+    
     fontSize:"1.5rem",
-    zIndex:3,
+    color:"black",
     position:"relative",
-    top:"10rem",
+    top:"9rem",
+    zIndex:3,
     transform:"rotateZ(-35deg)"
    }
    
