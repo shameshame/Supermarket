@@ -4,8 +4,8 @@ const shopNavStyle={
         top:"-5px",
         marginTop:"65px",
         zIndex: 4,
-       
-        color:"#392F5A"
+        color:"#392F5A",
+        
     },
 
     cartHeadline:{
@@ -14,7 +14,7 @@ const shopNavStyle={
         justifyContent:"space-between",
         alignItems:"center",
         backgroundColor:"#392F5A",
-        color:"white"
+        color:"white",
         
      },
 
@@ -24,9 +24,7 @@ const shopNavStyle={
         padding:"1rem"
     },
 
-    category:{
-
-    },
+    
 
     tabs:{
        minWidth:"25%",

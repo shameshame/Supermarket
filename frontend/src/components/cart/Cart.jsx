@@ -4,7 +4,6 @@ import {useSelector,useDispatch} from "react-redux"
 import CartItem from "../cartItem/CartItem.jsx"
 import Badge from '@mui/material/Badge';
 import Typography from '@mui/material/Typography';
-import {useSendOrderMutation} from "../../redux/services/cartApi"
 import {toggleCart} from '../../redux/features/cart/cartSlice';
 import cartStyle from "./cart.style"
 import Accordion from '@mui/material/Accordion';
@@ -19,7 +18,7 @@ import {createTheme} from "@mui/material/styles"
 import ScrollToBottom from 'react-scroll-to-bottom';
 import mobileCartStyle from '../mobileCart/mobileCart.style.js';
 import { useNavigate } from "react-router-dom";
-import Fab from '@mui/material/Fab';
+
 
 
 

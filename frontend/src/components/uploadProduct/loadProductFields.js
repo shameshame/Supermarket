@@ -15,9 +15,10 @@ const loadProductFields = [{
                            message: "The description includes letters only and must be up to 9 charachters"
                          }
                       },
+                      
                       {
-                        name:"category",
-                        label:"Category"
+                        name:"department",
+                        label:"Department"
                       },
 
                       {

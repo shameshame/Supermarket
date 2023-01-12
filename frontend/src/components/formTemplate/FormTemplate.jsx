@@ -10,6 +10,7 @@ import ImageLoader from "../imageLoader/ImageLoader.jsx"
 import LoadingButton from '@mui/lab/LoadingButton'
 import formStyle from "./formTemplate.style.js";
 import fieldInputMap from "../../config/fieldInputMap.js"
+import shopDepartments from "../../config/shopDepartments.js";
 
 function FormTemplate(props) {
     
@@ -17,6 +18,7 @@ function FormTemplate(props) {
            isLoading, isSuccess, error, isError,data, formTitle,
           }=props
     const [inputFields, setInputFields] = useState({})
+    
     const navigate = useNavigate();
 
     
@@ -62,9 +64,8 @@ function FormTemplate(props) {
     
     
     const handleFormChange = (event) => {
-       
-      setInputFields({...inputFields,[event.target.name]:event.target.value})
-      
+      const {name,value}=event.target
+      setInputFields({...inputFields,[name]:value})
     }
 
     return ( 
@@ -76,10 +77,11 @@ function FormTemplate(props) {
                 ? <ImageLoader key={index} state={inputFields} setState={setInputFields}
                   /> 
                 :
-                  
                 (fieldInputMap[field.name]?.input 
-               ? fieldInputMap[field.name].input(handleFormChange,inputFields[field.name]) 
-               :<TextField style={formStyle.textField} fullWidth key={index} type={field.type} label={field.label} 
+               ? fieldInputMap[field.name].input
+                (handleFormChange,{[field.name]:inputFields[field.name],
+                 category:inputFields.category}) 
+               :<TextField style={formStyle.textField} fullWidth key={field.name} type={field.type} label={field.label} 
                     {...register(field.name, {required:`${field.name} is required`,
                                          pattern:field.pattern,
                                          // Check if you  can change this line by passing useFormContext

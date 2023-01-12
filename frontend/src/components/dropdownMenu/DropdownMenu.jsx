@@ -10,12 +10,12 @@ function DropdownMenu(props) {
            fullWidth
            name={name}
            id="demo-simple-select"
-           value={current}
+           value={current || ''}
            label="Choose option"
            onChange={event=>handleChange(event)}
            sx={{mb:2}}
         >
-        {options.map((option)=><MenuItem  key={option} value={option}>{option}</MenuItem>)}
+        {options?.map((option)=><MenuItem  key={option} value={option}>{option}</MenuItem>)}
       </Select>
     );
 }

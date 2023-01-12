@@ -1,15 +1,16 @@
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem'
 import DropdownMenu from "../components/dropdownMenu/DropdownMenu.jsx"
+import shopDepartments from './shopDepartments.js';
 import {categories} from "../js/categories.js"
 
 
 const fieldInputMap={
     role:{ 
-            input:(handleChange,option)=> 
+            input:(handleChange,{role})=> 
                    
                    //Replace it with DropdownMenu component
-                   <Select label="Role" name="role" value={option} onChange={(event)=>handleChange(event)}>
+                   <Select label="Role" name="role" value={role} onChange={(event)=>handleChange(event)}>
                      <MenuItem value={"Customer"}>Customer</MenuItem>
                      <MenuItem value={"Admin"}>Admin</MenuItem>
                      <MenuItem value={"Storekeeper"}>Storekeeper</MenuItem>
@@ -20,7 +21,7 @@ const fieldInputMap={
     
     name:{
       label:"Name"
-
+      
     },
 
     email:{
@@ -37,6 +38,19 @@ const fieldInputMap={
              <DropdownMenu name="category" label="Category" handleChange={handleChange} current={current} options={categories}/>
     },
 
+    date:{
+      label:"Date"
+    },
+
+    department:{
+        label:"Department",
+        input:(handleChange,{department,category})=><> 
+                
+               <DropdownMenu name="department" label="Department" handleChange={handleChange} current={department} options={shopDepartments.map(item=>item.department)}/>
+               <DropdownMenu  name="category" label="Category" handleChange={handleChange} current={category} options={shopDepartments.find(item=>item.department===department)?.categories}/>
+             </>
+    },
+
     image:{
 
     },
@@ -44,9 +58,7 @@ const fieldInputMap={
     _id:{
       label:"Code"
     },
-    date:{
-      label:"Date"
-    },
+    
 
     status:{
       label:"Status"

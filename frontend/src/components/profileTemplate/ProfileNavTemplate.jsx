@@ -37,7 +37,7 @@ function ProfileNavTemplate(props) {
                   {loggedIn?loggedIn.name: `Sign In`}
                  
             </IconButton>
-            {anchorEl  && <Menu open={userMenuOpen} 
+            <Menu open={userMenuOpen} 
               anchorEl={anchorEl} 
               id="account-menu" 
               MenuListProps={{"aria-labelledby":"account-button",}}
@@ -45,18 +45,18 @@ function ProfileNavTemplate(props) {
               onClose={handleClose}
               anchorOrigin={{
                 vertical:"bottom",
-                horizontal:"right"
+                horizontal:"center"
               }}
 
               transformOrigin={{
                   vertical:"top",
-                  horizontal:"left"
+                  horizontal:"center"
               }}
             >
                   {profileMenu[loggedIn?.role]?.map((item,index)=><ProfileMenuItem key={index} {...item}
                                                                     resetMenu={item.label==="Log Out" ? setAnchorEl :undefined}
                                                                   />)}
-            </Menu>}
+            </Menu>
            
         </Box>
        

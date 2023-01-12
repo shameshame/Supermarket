@@ -5,6 +5,12 @@ const formStyle={
     justifyContent:"center",
     alignItems:"center",
     height:"100vh",
+   
+    
+   },
+
+   mobile:{
+      overflowY:"scroll"
    },
     
    textField :{

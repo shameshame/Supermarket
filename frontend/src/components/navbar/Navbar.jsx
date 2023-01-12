@@ -63,14 +63,7 @@ function Navbar(props) {
             
           </Box>}  
         </AppBar>
-              {isMobile && 
-                  <Fab style={navbar.searchIconMobile} onClick={()=>setDisplaySearch(!displaySearch)} 
-                   color="primary" aria-label="add"
-                  >
-                    <SearchIcon />
-                  </Fab>}
-                  {displaySearch && <TextField fullWidth style={navbar.searchFieldMobile}   placeholder="Enter category or name" sx={{mt:2}}/>
-                }
+              
         </Box>
 
        

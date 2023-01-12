@@ -46,10 +46,10 @@ function ShopNavMobile(props) {
           >
               <Logo/>
               <List sx={{mx:"auto"}}>
-                 {shopDepartments?.map(department=>
-                  <ListItem  key={department}>
+                 {shopDepartments?.map(item=>
+                  <ListItem  key={item.department}>
                     <ListItemButton>
-                      <ListItemText primary={department}/>
+                      <ListItemText primary={item.department}/>
                     </ListItemButton>
                   </ListItem>
                  )}

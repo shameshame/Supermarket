@@ -9,6 +9,9 @@ import Cart from "../cart/Cart"
 import {useSelector,useDispatch} from "react-redux"
 import Button from "@mui/material/Button"
 import {emptyCart} from '../../redux/features/cart/cartSlice';
+import shopDepartments from '../../config/shopDepartments';
+import Department from '../department/Department';
+
 
 
 
@@ -18,20 +21,20 @@ function ShopNav(props) {
     const cart = useSelector(state=>state.cart.cartItems)
     const dispatch= useDispatch()
 
+
     
     
     
     return (
         <Grid style={shopNavStyle.general}   columnSpacing={2} sx={{mt:5}} container>
             <Grid sx={{backgroundColor:"primary.main"}}  item lg={8}>
-              
-              {["Food","Special offers","Cosmetics","Appliances"].map((item,index)=>
-                <Button key={item}  sx={shopNavStyle.tabs}   >{item}</Button>
-              )}
-              
-              
+              <Stack direction="row" >
+                {shopDepartments.map((item)=>
+                   <Department key={item.department} name={item.department}/>
+                )}
+              </Stack>
             </Grid>
-            <Grid style={shopNavStyle.cartHeadline}  item lg={4}>
+            <Grid  style={shopNavStyle.cartHeadline}  item lg={4}>
                
                 <Typography variant="p">  My Cart</Typography>
                 {cart.length>0 && <Stack direction="row">
@@ -44,7 +47,7 @@ function ShopNav(props) {
                 </Stack>}
                 <Cart/>
                
-                </Grid>
+              </Grid>
                 
             
            </Grid>
