@@ -9,30 +9,34 @@ import {useState} from "react"
 
 function Department(props) {
     const {name}=props
-    const [anchorEl, setAnchorEl] = useState(null);
+    // const [anchorEl, setAnchorEl] = useState(null);
+    // const [buttonOnHover,setButtonOnHover]=useState(false)
+    const [state,setState]=useState({anchorEl:undefined,buttonOnHover:false})
+    const {anchorEl,buttonOnHover}=state
     let menuOnHover = false;
     
     const categories=shopDepartments.find(item=>item.department===name).categories
-    const tabOnHover = {...departmentStyle.tabsGeneral,...departmentStyle.tabsMouseOver}
-    const tabStyle={...departmentStyle.tabsGeneral,...departmentStyle.tabsMouseOut}
+    const {tabsGeneral,tabsMouseOver,tabsMouseOut}=departmentStyle
+    const tabOnHover = {...tabsGeneral,...tabsMouseOver}
+    const tabStyle={...tabsGeneral,...tabsMouseOut}
 
     const buttonOnHoverHandler = (event) => {
-  
-       if (anchorEl!==event.currentTarget) {
-         setAnchorEl(event.currentTarget);
+        if(anchorEl!==event.currentTarget){
+          setState({buttonOnHover:true,anchorEl:event.currentTarget})
         }
-  };
+    };
 
-  const menuOnHoverHandler = ()=>{
+    const menuOnHoverHandler = ()=>{
       menuOnHover = true;
-  }
+    }
 
   const menuHandleClick = ()=>{
-    setAnchorEl(undefined)
+    setState({buttonOnHover:false,anchorEl:undefined})
   }
 
   const  buttonMouseLeaveHandler=()=> {
     menuOnHover = false;
+   
     setTimeout(() => {
       if (!menuOnHover) {
         menuHandleClick();
@@ -46,7 +50,7 @@ function Department(props) {
           <Button 
              aria-haspopup="true"
              aria-owns={anchorEl ? {name} : null}
-             sx={{...tabStyle}}
+             sx={buttonOnHover?tabOnHover:tabStyle}
              onMouseOver={buttonOnHoverHandler} 
              onMouseLeave={buttonMouseLeaveHandler}
            >
