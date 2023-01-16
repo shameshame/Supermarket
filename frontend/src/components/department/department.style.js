@@ -1,9 +1,16 @@
 const departmentStyle = {
+    
+     overlay:{
+         position:"relative",
+        
+     }, 
+    
     tabsGeneral:{
         
         padding:"20px 40px",
-        position:"relative",
-        zIndex: 1562
+        marginRight:"40px",
+       
+       
     },
 
     tabsMouseOver:{

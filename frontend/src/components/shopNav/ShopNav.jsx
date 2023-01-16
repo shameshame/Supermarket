@@ -28,7 +28,7 @@ function ShopNav(props) {
     return (
         <Grid style={shopNavStyle.general}   columnSpacing={2} sx={{mt:5}} container>
             <Grid sx={{backgroundColor:"primary.main"}}  item lg={8}>
-              <Stack direction="row" >
+              <Stack direction="row" sx={{position:"relative"}}>
                 {shopDepartments.map((item)=>
                    <Department key={item.department} name={item.department}/>
                 )}
