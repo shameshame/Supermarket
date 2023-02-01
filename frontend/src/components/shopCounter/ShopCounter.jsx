@@ -10,13 +10,19 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import {createTheme} from "@mui/material/styles"
 import Divider from '@mui/material/Divider';
 import  Fab from "@mui/material/Fab"
-import Logo from "../logo/Logo.jsx"
+import {useParams } from "react-router-dom"
 import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 
 
 function ShopCounter(props) {
-    const {queryString}=props
+    
+  
+    
+    const defaultString = "sortBy=itemsSold_desc&limit=20"
+    const {category} = useParams();
+    const queryString= category ? `category=${category}` : defaultString
+    console.log(queryString)
     const [products,setProducts]= useState()
     const [displaySearch,setDisplaySearch]=useState(false)
     const expanded=useSelector(state=>state.cart.expanded)
@@ -33,7 +39,7 @@ function ShopCounter(props) {
     useEffect(()=>{
         putProductsOnTheCounter() 
         
-    },[])
+    },[category])
 
     
     return( <Box>

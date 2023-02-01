@@ -4,13 +4,14 @@ import shopDepartments from "../../config/shopDepartments";
 import departmentStyle from "./department.style";
 import Button from "@mui/material/Button"
 import  Box  from "@mui/system/Box";
+import { useNavigate } from "react-router-dom";
+import ShopCounter from "../shopCounter/ShopCounter.jsx"
 import {useState} from "react"
 
 
 function Department(props) {
     const {name}=props
-    // const [anchorEl, setAnchorEl] = useState(null);
-    // const [buttonOnHover,setButtonOnHover]=useState(false)
+    const navigate = useNavigate()
     const [state,setState]=useState({anchorEl:undefined,buttonOnHover:false})
     const {anchorEl,buttonOnHover}=state
     let menuOnHover = false;
@@ -30,8 +31,9 @@ function Department(props) {
       menuOnHover = true;
     }
 
-  const menuHandleClick = ()=>{
+  const menuHandleClick = (event,category)=>{
     setState({buttonOnHover:false,anchorEl:undefined})
+    if(category) navigate(`/shop/${category.replace(/ /g,'%20')}`)
   }
 
   const  buttonMouseLeaveHandler=()=> {
@@ -77,7 +79,7 @@ function Department(props) {
           
         >
             {categories?.map((category)=>
-               <MenuItem   onClick={menuHandleClick} key={category}>
+               <MenuItem   onClick={(event)=>menuHandleClick(event,category)} key={category}>
                   {category}
                </MenuItem>
             )}

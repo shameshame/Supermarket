@@ -15,7 +15,7 @@ const departmentStyle = {
            transform: "scale(0.8)",
            backgroundColor:"#F7F0F0",
            borderRadius:"12px",
-        //    color:"primary.main",
+        // color:"primary.main",
            color:"#E52210",
            transition: "transform 1.2s",
            

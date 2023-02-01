@@ -22,9 +22,6 @@ function ShopNav(props) {
     const dispatch= useDispatch()
 
 
-    
-    
-    
     return (
         <Grid style={shopNavStyle.general}   columnSpacing={2} sx={{mt:5}} container>
             <Grid sx={{backgroundColor:"primary.main"}}  item lg={8}>

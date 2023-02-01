@@ -22,10 +22,11 @@ function App() {
              <Routes>
                 <Route path="/">
                       {/* Public routes */}
-                  <Route path="/" element={<ShopCounter queryString="sortBy=itemsSold_desc&limit=20"/> }/>
+                  <Route path="/" element={<ShopCounter /> }/>
                   <Route path="/login" element={<Login />}/>
                   <Route path="/register" element={<SignUp />}/>
                   <Route path="/unauthorized" element = {<Unauthorized/>}/>
+                  <Route path="/shop/:category" element={<ShopCounter />}/>
                       {/* Protected routes */}
                   <Route path="/customer"  element={<ProtectedRoute allowedRoles={["Customer","Admin"]}/>}>
                     <Route path="/customer"  element={<CustomerProfile/>}/>

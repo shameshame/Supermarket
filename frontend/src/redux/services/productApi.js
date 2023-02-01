@@ -16,6 +16,8 @@ export const productApi = createApi({
             }
         }),
 
+        
+
         newProduct:builder.mutation({
            query(product) {
               return {
