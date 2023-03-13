@@ -8,7 +8,7 @@ export const productApi = createApi({
     }),
 
     endpoints: (builder) => ({
-        mostPopularProducts: builder.query({
+        searchProducts: builder.query({
             query(queryString) {
                 return {
                     url:`/search?${queryString}`
@@ -16,7 +16,14 @@ export const productApi = createApi({
             }
         }),
 
-        
+        searchProductsByUserInput : builder.query({
+           query(input){
+             return{
+                 url:`/search_by_input?input=${input}`,
+                  
+             }
+           }
+        }),
 
         newProduct:builder.mutation({
            query(product) {
@@ -33,5 +40,8 @@ export const productApi = createApi({
 
 export const {
     useNewProductMutation,
-    useMostPopularProductsQuery
+    useSearchProductsQuery,
+    useSearchProductsByUserInputQuery
 }=productApi
+
+export default productApi

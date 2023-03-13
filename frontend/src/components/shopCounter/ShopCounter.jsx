@@ -13,16 +13,13 @@ import  Fab from "@mui/material/Fab"
 import {useParams } from "react-router-dom"
 import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
+import ProductSearch from "../productSearch/ProductSearch.jsx"
 
 
 function ShopCounter(props) {
     
-  
-    
-    const defaultString = "sortBy=itemsSold_desc&limit=20"
     const {category} = useParams();
-    const queryString= category ? `category=${category}` : defaultString
-    console.log(queryString)
+    const queryString= category ? `category=${category}` : "sortBy=itemsSold_desc&limit=20"
     const [products,setProducts]= useState()
     const [displaySearch,setDisplaySearch]=useState(false)
     const expanded=useSelector(state=>state.cart.expanded)
@@ -44,14 +41,8 @@ function ShopCounter(props) {
     
     return( <Box>
               {!isMobile && <ShopNav/>}
-              {isMobile && 
-                  <Fab style={shopCounter.searchIconMobile} onClick={()=>setDisplaySearch(!displaySearch)} 
-                   color="primary" aria-label="add"
-                  >
-                    <SearchIcon />
-                  </Fab>}
-                  {displaySearch && <TextField fullWidth style={shopCounter.searchFieldMobile}   placeholder="Enter category or name" sx={{mt:2}}/>
-                }
+              {/* This must be separate component */}
+              <ProductSearch setFoundProducts={setProducts}/>
               <Grid    style={shopCounter.general}  container  >
                  <Grid item lg={expanded?8:12}>
                    <Grid style={shopCounter.row}  container spacing={isMobile?3:0}>{products?.map(product=>

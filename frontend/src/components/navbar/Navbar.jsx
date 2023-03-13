@@ -34,23 +34,7 @@ function Navbar(props) {
               //Desktop view
             ?<Box sx={{mx:2,...navbar.toolbar}} >
                  <Logo/>
-                 <TextField   size="small"
-                    // onChange={(event)=> setSearchInput(event.target.value)}
-                    
-                    id="standard-search"
-                    focused
-                    InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                         <SearchIcon/>
-                      </InputAdornment>),
-
-                     
-                    }}
-                    variant="outlined"
-                    style={{width:600}}
-                  />
-                  <ProfileNavTemplate />
+                 <ProfileNavTemplate />
                </Box>
              //Mobile view
           :<Box style={navbar.toolbarMobile}>

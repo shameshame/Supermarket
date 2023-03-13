@@ -28,6 +28,16 @@ const fetchProductsByQuery = asyncHandler(async (req, res)=>{
    res.json(productsSubset)
 })
 
+const fetchProductsByUserInput = async(req,res)=>{
+   
+    const {input}=req.query
+    Product.find({description:new RegExp(input,'i')}).exec((error,result)=>{
+    error ? res.status(400).json({message: error.message})
+          : (result ? res.status(200).json(result) 
+                    :res.status(200).json({message:"No matches for your request"}))
+    });
+}
+
 const deleteProduct= async (req, res)=>{
     await Product.findByIdAndDelete(req.params.id,(error,doc)=>{
        error ? res.status(400).json({message: error.message})
@@ -37,5 +47,6 @@ const deleteProduct= async (req, res)=>{
  }
 
 module.exports={
-    addNewProduct, fetchProductsByQuery
+    addNewProduct, fetchProductsByQuery,deleteProduct,
+    fetchProductsByUserInput
 }
