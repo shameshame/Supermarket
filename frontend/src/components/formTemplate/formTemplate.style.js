@@ -20,7 +20,26 @@ const formStyle={
    title:{
      color:"#0267C1",
      marginBottom:"1.5rem"
-   }
+   },
+
+   errorMessage:{
+     alignToMobile:{
+        vertical:"bottom", 
+        horizontal:"center"
+     },
+     alignToDesktop:{
+      vertical:"bottom", 
+      horizontal:"left"
+     },
+   
+     positionMobile:{
+        position:"relative",
+         bottom:"30px"
+     }
+   },
+
+   
+
     
 }
 

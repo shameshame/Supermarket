@@ -2,15 +2,17 @@ import {useNavigate} from "react-router-dom";
 import {useState,useEffect} from "react";
 import {FormProvider, useForm} from 'react-hook-form';
 import TextField from '@mui/material/TextField';
-import {toast } from 'react-toastify';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import customValidationFields from "./customValidationFields.js"
 import ImageLoader from "../imageLoader/ImageLoader.jsx"
 import LoadingButton from '@mui/lab/LoadingButton'
 import formStyle from "./formTemplate.style.js";
 import fieldInputMap from "../../config/fieldInputMap.js"
-import shopDepartments from "../../config/shopDepartments.js";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import {createTheme} from "@mui/material/styles"
+
 
 function FormTemplate(props) {
     
@@ -18,27 +20,24 @@ function FormTemplate(props) {
            isLoading, isSuccess, error, isError,data, formTitle,
           }=props
     const [inputFields, setInputFields] = useState({})
-    
     const navigate = useNavigate();
-
+    const [showErrorMessage,setShowErrorMessage]=useState(false)
+    const theme=createTheme()
+    const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
+    const {errorMessage:{alignToMobile,alignToDesktop,positionMobile},title,general}=formStyle
     
 
     //Functions to run after loading
     const redirectIfSuccess=()=>{
        
         redirect ? navigate(redirect):navigate(`/${data.role}`);
-        toast.success(message);
+        
     }
 
     const errorStack=()=>{
         if (isError) {
-            Array.isArray(error?.data.error)
-                  ? error?.data.error.forEach((element) =>
-                     toast.error(element.message, {
-                     position: 'top-right',
-                    }))
-                  
-                  :toast.error(error?.data.message, {position: 'top-right',});
+          setShowErrorMessage(true)
+           
         }
     }
 
@@ -53,11 +52,12 @@ function FormTemplate(props) {
     
     useEffect(() => {
         if (isSubmitSuccessful)  reset();
-        
+    
     }, [isSubmitSuccessful]);
 
     useEffect(() => {
-        isSuccess? redirectIfSuccess():errorStack()
+
+       isSuccess ? redirectIfSuccess() :errorStack()
     }, [isLoading]);
 
     
@@ -68,10 +68,19 @@ function FormTemplate(props) {
       setInputFields({...inputFields,[name]:value})
     }
 
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setShowErrorMessage(false);
+    };
+  
+
     return ( 
         <FormProvider {...methods}>
-          <Container style={formStyle.general} component="form" onSubmit={handleSubmit(()=>submitHandler(inputFields))} maxWidth="xs">
-            <Typography style={formStyle.title} variant="h4">{formTitle}</Typography>
+          <Container style={general} component="form" onSubmit={handleSubmit(()=>submitHandler(inputFields))} maxWidth="xs">
+            <Typography style={title} variant="h4">{formTitle}</Typography>
            {fieldsToFill?.map((field,index)=>
              field.name==="image" 
                 ? <ImageLoader key={index} state={inputFields} setState={setInputFields}
@@ -97,11 +106,14 @@ function FormTemplate(props) {
             
             )}
              
-            <LoadingButton  fullWidth style={formStyle.loadingButton} type="submit"  loading={isLoading} variant="contained" color="primary" >
+            <LoadingButton  fullWidth style={formStyle.loadingButton} type="submit"   loading={isLoading} variant="contained" color="primary" >
                 {buttonText}
            </LoadingButton> 
-          
-        </Container>
+           
+           <Snackbar open={showErrorMessage}   anchorOrigin={isMobile ? alignToMobile :alignToDesktop}  autoHideDuration={6000} onClose={handleClose}>
+               <Alert severity="error" variant="filled" sx={isMobile?positionMobile:null}>{error?.data.message}</Alert>
+           </Snackbar>
+         </Container>
       
        
         </FormProvider>

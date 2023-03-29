@@ -29,14 +29,9 @@ function ProductSearch(props) {
     
     const search = async (text)=>{
        try{
-
-        console.log("Started")
-         
-          
-            
-          let foundProducts= await triggerForSearchByInput(text).unwrap()
-          console.log("Found:",foundProducts)
-          setFoundProducts(foundProducts)
+           
+        let foundProducts= await triggerForSearchByInput(text).unwrap()
+        setFoundProducts(foundProducts)
        }catch(error){
          console.log(error)
        }
@@ -65,7 +60,9 @@ function ProductSearch(props) {
                         >
                           <SearchIcon />
                         </Fab>
-                        {displaySearch && <TextField fullWidth style={searchFieldMobile}   placeholder="Enter category or name" sx={{mt:2}}/>}
+                        {displaySearch && <TextField fullWidth style={searchFieldMobile}   
+                        onKeyUp={(event)=>inputEndHandler(event)} onChange={(event)=>handleChange(event)}
+                        placeholder="Enter category or name" sx={{mt:2}}/>}
                      </Box> 
                     : 
                     <Box sx={general}>

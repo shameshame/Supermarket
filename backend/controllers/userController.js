@@ -12,6 +12,8 @@ const accessTokenOptions = {
 // Error Handlers (it's better to have them all as statics in user model)
 
 function userExistsHandler(user){
+   
+ 
    if(user){
      throw new Error('User already exists')
    }
@@ -31,7 +33,7 @@ async function hashedPassword(password){
 
 async function invalidLoginHandler(user,password){
     if(!user || !(await bcrypt.compare(password, user.password))){
-       throw new Error('Invalid credentials')
+       throw new Error('One or more credentials is incorrect')
     }
 }
 
