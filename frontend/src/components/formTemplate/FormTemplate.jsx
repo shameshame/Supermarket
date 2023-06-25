@@ -61,8 +61,6 @@ function FormTemplate(props) {
     }, [isLoading]);
 
     
-    
-    
     const handleFormChange = (event) => {
       const {name,value}=event.target
       setInputFields({...inputFields,[name]:value})

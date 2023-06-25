@@ -14,16 +14,17 @@ function ProductSearch(props) {
     const {setFoundProducts}=props
     const theme=createTheme()
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-    const [displaySearch,setDisplaySearch]=useState(false)
-    const [searchInput,setSearchInput]=useState('')
+    const [searchState,setSearchState]=useState({displaySearch:false,searchInput:""})
+    const {displaySearch,searchInput}=searchState
     const {searchIconMobile,searchFieldMobile,general,searchFieldDeskTop} = productSearchStyle
     const [triggerForSearchByInput, searchResult, lastPromiseInfo] = productApi.useLazySearchProductsByUserInputQuery()
     
     const waitTime = 1000
     let timer;
 
+    
     const handleChange = (event)=>{
-         setSearchInput(event.currentTarget.value)
+      setSearchState({...searchState, searchInput:event.currentTarget.value})
     }
     
     
@@ -45,17 +46,26 @@ function ProductSearch(props) {
        
         // Wait for X ms and then process the request
         timer = setTimeout(() => {
-            
             search(searchInput);
-            
         }, waitTime);
+    }
+
+    const clickSearchIconHandler = ()=>{
+
+      if(displaySearch){
+         setSearchState({searchInput:'',displaySearch:false})
+         search('')
+      }
+        
+      else
+         setSearchState({...searchState,displaySearch:true})
     }
     
     
     return (
         <Box>
          {isMobile  ? <Box>
-                       <Fab style={searchIconMobile} onClick={()=>setDisplaySearch(!displaySearch)} 
+                       <Fab style={searchIconMobile} onClick={clickSearchIconHandler} 
                            color="primary" aria-label="add"
                         >
                           <SearchIcon />

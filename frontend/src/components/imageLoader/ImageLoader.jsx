@@ -4,12 +4,17 @@ import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import imageLoaderStyle from "./imageLoader.style"
+import useMediaQuery from '@mui/material/useMediaQuery';
+import {createTheme} from "@mui/material/styles"
+
 
 
 
 function ImageLoader(props) {
     const [image, setImage] = useState({ preview: '', data: '' })
     const {state,setState}=props
+    const theme=createTheme()
+    const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
     
     
     const handleFileChange = (event) => {
@@ -32,14 +37,14 @@ function ImageLoader(props) {
     
     
     return (
-        <Stack style={imageLoaderStyle}  onChange={(event)=>encodeToBase64(event)}>
+        <Stack style={isMobile?imageLoaderStyle.generalmobile:imageLoaderStyle.general}  onChange={(event)=>encodeToBase64(event)}>
 
          
-         {image.preview && <img  src={image.preview} width='200' height='150' />}
+         {image.preview && <img style={isMobile?imageLoaderStyle.imageMobile:null}  src={image.preview} width={isMobile?150:200} height={isMobile?100:150} />}
          
          <input onChange={handleFileChange} style={{ display: 'none' }} id="upload-photo" name="uploaded-photo" type="file" />
          <label htmlFor="upload-photo">
-           <Fab color="secondary" size="small" component="span" aria-label="add" variant="extended">
+           <Fab style={imageLoaderStyle.button} color="secondary" size="small" component="span" aria-label="add" variant="extended">
                <AddIcon /> Upload photo
            </Fab>
          </label> 

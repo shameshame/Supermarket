@@ -37,6 +37,7 @@ const cartSlice=createSlice({
 
         emptyCart:(state)=>{
           state.cartItems=[];
+          console.log("Cart is empty")
         }
     }
 

@@ -22,7 +22,7 @@ function OrderDetails(props) {
     const location = useLocation();
     const navigate = useNavigate()
     const {products}=state;
-    const checkOut= location.pathname==="/customer/check_out"
+    const orderSummary= location.pathname==="/customer/order_summary"
     const theme=createTheme()
     const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
 
@@ -51,16 +51,16 @@ function OrderDetails(props) {
                    </TableBody>
                 </Table>
                <Box sx={{display:"flex", flexDirection:isMobile? "column":"row",
-                    justifyContent:checkOut? "space-evenly" :"center",
+                    justifyContent:orderSummary? "space-evenly" :"center",
                     mt:4
                     }}
                 >
-                  <Button variant="contained" onClick={()=>navigate(checkOut? '/': '/customer/my_orders')} 
+                  <Button variant="contained" onClick={()=>navigate(orderSummary? '/': '/customer/my_orders')} 
                           sx={{mb:isMobile ? 4 :0,borderRadius:"1rem"}}
                   >
-                        {checkOut ?"Cancel"  : "Back To My Orders"}
+                        {orderSummary ?"Cancel"  : "Back To My Orders"}
                   </Button>
-                  {checkOut && <SendOrderButton/>}
+                  {orderSummary && <Button onClick={()=>navigate("/customer/check_out")}>Check Out</Button>}
               </Box>
               </TableContainer>
         </Box>

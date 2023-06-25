@@ -70,7 +70,7 @@ export const CheckOutButton =({setOpenCart})=>{
 
   const toOrderSummary=()=>{
     if(isMobile)setOpenCart(false)
-    navigate("/customer/check_out",{ state: {products: cart } })
+    navigate("/customer/order_summary",{ state: {products: cart } })
   }
   
   return <Button

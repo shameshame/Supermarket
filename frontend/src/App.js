@@ -12,7 +12,10 @@ import MyOrders from "./components/myOrders/MyOrders.jsx"
 import UserList from "./components/userList/UserList";
 import ShopCounter from "./components/shopCounter/ShopCounter.jsx"
 import OrderDetails from './components/orderDetails/OrderDetails';
-// import "../src/components/userList/UserList.css"
+import OrderConfirmation from "./components/orderConfirmation/OrderConfirmation.jsx"
+import NotFoundPage from "./components/notFoundPage/NotFoundPage.jsx";
+import CheckOut from './components/checkOut/CheckOut.jsx';
+
 
 function App() {
   
@@ -31,7 +34,9 @@ function App() {
                   <Route path="/customer"  element={<ProtectedRoute allowedRoles={["Customer","Admin"]}/>}>
                     <Route path="/customer"  element={<CustomerProfile/>}/>
                     <Route path="my_orders" element={<MyOrders/>}/>
-                    <Route path="check_out" element={<OrderDetails/>}/>
+                    <Route path="order_summary" element={<OrderDetails/>}/>
+                    <Route path="check_out" element={<CheckOut/>}/>
+                    <Route path="order_sent" element ={<OrderConfirmation/>}/>
                     <Route path="my_orders/order_details" element={<OrderDetails/>}/>
                   </Route>
                   
@@ -44,6 +49,7 @@ function App() {
                     <Route path="/new_product" element = {<LoadProduct/>}/>
                   </Route>
                 </Route>
+                <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </BrowserRouter>
     );
