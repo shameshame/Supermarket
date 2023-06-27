@@ -8,7 +8,7 @@ import {toggleCart} from '../../redux/features/cart/cartSlice';
 import cartStyle from "./cart.style"
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import  AccordionDetails  from '@mui/material/AccordionDetails';
+import AccordionDetails  from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ShoppingCartSharpIcon from '@mui/icons-material/ShoppingCartSharp';
 import LocalMallIcon from '@mui/icons-material/LocalMall';

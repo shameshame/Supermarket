@@ -7,7 +7,6 @@ import shopNavStyle from './shopNav.style';
 import Typography from '@mui/material/Typography';
 import Cart from "../cart/Cart"
 import {useSelector,useDispatch} from "react-redux"
-import Button from "@mui/material/Button"
 import {emptyCart} from '../../redux/features/cart/cartSlice';
 import shopDepartments from '../../config/shopDepartments';
 import Department from '../department/Department';
@@ -39,7 +38,7 @@ function ShopNav(props) {
                      <SaveAltIcon sx={{fontSize:"2rem"}}/>
                     </IconButton>
                    <IconButton onClick={()=>dispatch(emptyCart())}  style={shopNavStyle.iconButton}>
-                     <DeleteIcon  sx={{fontSize:"2rem"}}/>
+                     <DeleteIcon onClick={()=>dispatch(emptyCart)}  sx={{fontSize:"2rem"}}/>
                     </IconButton>
                 </Stack>}
                 <Cart/>

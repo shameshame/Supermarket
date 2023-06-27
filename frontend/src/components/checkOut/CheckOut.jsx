@@ -4,11 +4,9 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import {FormProvider, useForm} from 'react-hook-form';
 import LoadingButton from '@mui/lab/LoadingButton'
-import checkOutFields from './checkOutFields.js';
 import checkOutStyle from './checkOut.style.js';
 import Grid from '@mui/material/Grid';
 import { totalItems,totalPrice } from '../../js/orderSummary.js';
@@ -16,7 +14,6 @@ import {useSendOrderMutation} from "../../redux/services/cartApi";
 import {emptyCart} from "../../redux/features/cart/cartSlice"
 import {useSelector,useDispatch} from "react-redux"
 import {useNavigate} from "react-router-dom"
-import { current } from '@reduxjs/toolkit';
 
 function CheckOut(props) {
     
@@ -64,7 +61,7 @@ function CheckOut(props) {
 
     useEffect(() => {
 
-      if(isSuccess) navigate("/customer/order_sent")
+      if(isSuccess) navigate("/customer/order_sent",{ state: {orderId: data.id}})
    }, [isLoading]);
 
     

@@ -19,7 +19,7 @@ const createOrder=asyncHandler(async(req,res)=>{
         await Order.enoughItemsInStock(cart,session)
         await Order.loadCartItems(cart,orderId,session)
         await Order.create([{owner : req.user._id,_id:orderId,totalPrice,status:"Completed"}],{session})
-        res.status(201).json({message:"Order has been sent successfully"}) 
+        res.status(201).json({message:"Order has been sent successfully",id:orderId}) 
       })
    }catch (error) {
      res.status(500).json({message: error.message})

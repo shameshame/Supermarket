@@ -1,12 +1,13 @@
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from "@mui/material/Button"
-import {useNavigate} from "react-router-dom"
+import {useNavigate,useLocation} from "react-router-dom"
 import orderConfirmationStyle from "./orderConfirmation.style"
 
 function OrderConfirmation(props) {
     const navigate=useNavigate()
-    const {orderId}=props
+    const {state} = useLocation();
+    const {orderId}=state
     
     return (
         <Box style={orderConfirmationStyle.general}>

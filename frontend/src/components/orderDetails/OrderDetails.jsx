@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import Stack from "@mui/material/Stack"
 import Button from '@mui/material/Button';
 import Table from "@mui/material/Table";
 import TableHead from '@mui/material/TableHead'
@@ -6,15 +7,13 @@ import TableRow from '@mui/material/TableRow';
 import TableContainer  from "@mui/material/TableContainer";
 import TableBody from '@mui/material/TableBody'
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import SendOrderButton from "../sendOrderButton/SendOrderButton.jsx"
 import {useNavigate,useLocation} from "react-router-dom";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import {createTheme} from "@mui/material/styles" 
 import orderDetailsStyle from "./orderDetails.style"
-import ScrollToBottom from 'react-scroll-to-bottom';
 import Typography from '@mui/material/Typography';
 import lastOrders from "../myOrders/myOrder.style"
-import {useEffect} from "react"
+
 
 function OrderDetails(props) {
    
@@ -50,18 +49,14 @@ function OrderDetails(props) {
                      }
                    </TableBody>
                 </Table>
-               <Box sx={{display:"flex", flexDirection:isMobile? "column":"row",
-                    justifyContent:orderSummary? "space-evenly" :"center",
-                    mt:4
-                    }}
-                >
+               <Stack direction={isMobile ? "column" :"row"} style={orderDetailsStyle.buttonPanel}>
                   <Button variant="contained" onClick={()=>navigate(orderSummary? '/': '/customer/my_orders')} 
-                          sx={{mb:isMobile ? 4 :0,borderRadius:"1rem"}}
+                        style={orderDetailsStyle.button}  
                   >
                         {orderSummary ?"Cancel"  : "Back To My Orders"}
                   </Button>
-                  {orderSummary && <Button onClick={()=>navigate("/customer/check_out")}>Check Out</Button>}
-              </Box>
+                  {orderSummary && <Button variant="contained" color="error" style={orderDetailsStyle.button} onClick={()=>navigate("/customer/check_out")}>Check Out</Button>}
+              </Stack>
               </TableContainer>
         </Box>
         

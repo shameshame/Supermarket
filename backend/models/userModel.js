@@ -35,6 +35,9 @@ const userSchema=mongoose.Schema({
     toObject:{virtuals:true}
 })
 
+
+//Static methods
+
 userSchema.statics.findByCredentials = async (email,password)=>{
     const foundUser = await User.findOne({email});
     
@@ -55,6 +58,38 @@ userSchema.statics.formatDate= (date)=>{
     return `${day}-${month}-${year},${hours}:${minutes}`;
 }
 
+userSchema.statics.hashedPassword = async (password)=>{
+    const salt = await bcrypt.genSalt(10)
+    return await bcrypt.hash(password, salt)
+}
+
+userSchema.statics.userExistsHandler= (user)=>{
+    if(user){
+        throw new Error('User already exists')
+    }
+}
+
+userSchema.statics.missingFieldHandler =(name,email,password)=>{
+    if (!name || !email || !password) {
+       throw new Error('Please fill all the fields')
+    }
+}
+
+userSchema.statics.invalidLoginHandler =async (user,password)=>{
+    if(!user || !(await bcrypt.compare(password, user.password))){
+       throw new Error('One or more credentials is incorrect')
+    }
+}
+
+userSchema.statics.invalidInputHandler =(user)=>{
+    if(!user){
+       throw new Error('Invalid user data')
+    }
+}
+
+
+
+//Array of orders - virtual field, all the orders can be found in Orders collection by user id
 userSchema.virtual("orders",{
     ref: "Order",
     localField:"_id",

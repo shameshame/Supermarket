@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken')
-const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler')
 const User = require('../models/userModel')
 
@@ -9,39 +8,9 @@ const accessTokenOptions = {
                         httpOnly: true
 }
 
-// Error Handlers (it's better to have them all as statics in user model)
 
-function userExistsHandler(user){
-   
- 
-   if(user){
-     throw new Error('User already exists')
-   }
-    
-}
 
-function missingFieldHandler(name,email,password){
-    if (!name || !email || !password) {
-       throw new Error('Please fill all the fields')
-    }
-}
 
-async function hashedPassword(password){
-    const salt = await bcrypt.genSalt(10)
-    return await bcrypt.hash(password, salt)
-}
-
-async function invalidLoginHandler(user,password){
-    if(!user || !(await bcrypt.compare(password, user.password))){
-       throw new Error('One or more credentials is incorrect')
-    }
-}
-
-function invalidInputHandler(user){
-    if(!user){
-       throw new Error('Invalid user data')
-    }
-}
 
 // @desc    Register new user
 // @route   POST /api/users
@@ -50,10 +19,10 @@ const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body
   
     try{
-      missingFieldHandler(name,email,password)
-      userExistsHandler(await User.findOne({ email }))
-      const user = await User.create({name,email,password: await hashedPassword(password) })
-      invalidInputHandler(user)
+      User.missingFieldHandler(name,email,password)
+      User.userExistsHandler(await User.findOne({ email }))
+      const user = await User.create({name,email,password: await User.hashedPassword(password) })
+      User.invalidInputHandler(user)
   
       res.status(201).json({
           _id: user.id,
@@ -73,7 +42,7 @@ const loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body
        try{
            const user = await User.findOne({ email })
-           await invalidLoginHandler(user,password)
+           await User.invalidLoginHandler(user,password)
            user.lastLogin = User.formatDate(new Date())
            await user.save()
            res.cookie("logged_in",true,{...accessTokenOptions,httpOnly:false})
