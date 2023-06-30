@@ -7,7 +7,7 @@ const cors=require("cors")
 const PORT=process.env.PORT || 5000
 const {requestMethod} = require("./middleware/requestMethod")
 
-connectDB()
+// connectDB()
 
 const app=express()
 
@@ -23,10 +23,11 @@ app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/orders', require('./routes/orderRoutes'));
 app.use('/api/inventory', require('./routes/productRoutes'))
 
-app.listen(PORT,()=>{
+connectDB().then(()=> {
+    app.listen(PORT,()=>{
     console.log(`Server is listening on port ${PORT}`)
 })
 
-
+})
 
 
