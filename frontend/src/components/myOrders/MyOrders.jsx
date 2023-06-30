@@ -1,4 +1,3 @@
-import {useEffect} from "react"
 import {useGetMyOrdersQuery} from "../../redux/services/cartApi"
 import formatDate from "../../js/formatDate.js"
 import Box from '@mui/material/Box'
@@ -10,8 +9,7 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow';
 import TableContainer  from "@mui/material/TableContainer";
 import TableBody from '@mui/material/TableBody'
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import OrderDetails from "../orderDetails/OrderDetails"
+import TableCell from "@mui/material/TableCell";
 import {useNavigate} from "react-router-dom"
 import "../userList/UserList.css"
 

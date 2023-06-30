@@ -1,9 +1,6 @@
 import {useState} from "react"
 import IconButton from '@mui/material/IconButton';
 import {CartButton,CartContent,CheckOutButton} from "../cart/Cart.jsx"
-import Collapse from '@mui/material/Collapse';
-import Drawer from "@mui/material/Drawer"
-import Menu from '@mui/material/Menu'
 import Box from '@mui/material/Box'
 import mobileCartStyle from "./mobileCart.style"
 

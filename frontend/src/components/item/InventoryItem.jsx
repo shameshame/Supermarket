@@ -6,19 +6,18 @@ import { useDispatch } from 'react-redux';
 import useCounter from "../../customHooks/useCounter"
 import {addToCart} from '../../redux/features/cart/cartSlice'; 
 import inventoryItemStyle from "./inventoryItem.style.js";
-import amber from "@mui/material/colors/amber"
 import Stack from '@mui/material/Stack';
 import {useState} from "react"
 import useMediaQuery from '@mui/material/useMediaQuery';
 import {createTheme} from "@mui/material/styles";
-import Card from '@mui/material/Card'
+
 
 
 
 function InventoryItem(props) {
     const [count, increment, decrement]=useCounter(1,1)
     const dispatch=useDispatch() 
-    const {_id,description,brand,price,image,category,itemsSold}=props
+    const {_id,description,brand,price,image}=props
     const propsForCart= {_id,description,brand,price}
     const [hover,setHover]=useState(false)
     const theme=createTheme()

@@ -8,7 +8,7 @@ import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux"
 import {profilePaper} from "./profileTemplate.style"
 import profileMenu from "../../config/profileMenu.js"
-import Stack from '@mui/material/Stack';
+
 
 function ProfileNavTemplate(props) {
     

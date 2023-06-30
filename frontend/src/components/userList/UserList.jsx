@@ -25,7 +25,7 @@ function UserList(props) {
     const {rows,successAlertOpen,errorAlertOpen}=table
     
 
-    const [trigger, result, lastPromiseInfo] = userApi.useLazyGetAllUsersQuery()
+    const [trigger] = userApi.useLazyGetAllUsersQuery()
 
     useEffect(() => {
         const fetchUsers= async()=>{

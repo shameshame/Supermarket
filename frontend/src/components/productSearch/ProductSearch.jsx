@@ -17,7 +17,7 @@ function ProductSearch(props) {
     const [searchState,setSearchState]=useState({displaySearch:false,searchInput:""})
     const {displaySearch,searchInput}=searchState
     const {searchIconMobile,searchFieldMobile,general,searchFieldDeskTop} = productSearchStyle
-    const [triggerForSearchByInput, searchResult, lastPromiseInfo] = productApi.useLazySearchProductsByUserInputQuery()
+    const [triggerForSearchByInput] = productApi.useLazySearchProductsByUserInputQuery()
     
     const waitTime = 1000
     let timer;

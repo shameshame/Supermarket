@@ -1,5 +1,4 @@
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
+
 import {useState} from "react"
 import {useDispatch} from "react-redux"
 import Grid from '@mui/material/Grid'
@@ -15,7 +14,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import useCounter from "../../customHooks/useCounter"
 import Counter from '../counter/Counter.jsx';
 import {addToCart,removeFromCart,removeSingleItem} from '../../redux/features/cart/cartSlice';
-import Container from '@mui/material/Container'
+
 
 function CartItem(props) {
     const {_id,price,description,quantity,image}=props

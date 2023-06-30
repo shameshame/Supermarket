@@ -1,4 +1,3 @@
-import MyOrders from "../myOrders/MyOrders";
 import {customerPanelMenu} from "./customerMenu.js";
 import PanelTemplate from "../panelTemplate/PanelTemplate.jsx"
 

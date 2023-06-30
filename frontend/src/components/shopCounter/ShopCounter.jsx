@@ -19,7 +19,6 @@ function ShopCounter(props) {
     const queryString= category ? `category=${category}` : "sortBy=itemsSold_desc&limit=20"
     const [loadProducts]=productApi.useLazySearchProductsQuery()
     const [products,setProducts]= useState()
-    const [displaySearch,setDisplaySearch]=useState(false)
     const expanded=useSelector(state=>state.cart.expanded)
 
     const theme=createTheme()

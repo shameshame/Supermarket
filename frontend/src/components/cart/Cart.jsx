@@ -12,7 +12,7 @@ import AccordionDetails  from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ShoppingCartSharpIcon from '@mui/icons-material/ShoppingCartSharp';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
-import { totalItems,totalPrice } from '../../js/orderSummary.js';
+import { totalItems} from '../../js/orderSummary.js';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import {createTheme} from "@mui/material/styles"
 import ScrollToBottom from 'react-scroll-to-bottom';

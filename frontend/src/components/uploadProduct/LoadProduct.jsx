@@ -1,4 +1,3 @@
-import Box from '@mui/material/Box'
 import {useNewProductMutation} from "../../redux/services/productApi"
 import loadProductFields from "./loadProductFields.js"
 import FormTemplate from "../formTemplate/FormTemplate";

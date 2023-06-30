@@ -6,27 +6,19 @@ import Box from '@mui/material/Box'
 import {useState} from "react"
 import shopDepartments from '../../config/shopDepartments';
 import shopNavMobileStyle from './shopNavMobile.style';
-import Stack  from '@mui/material/Stack';
-import  Typography  from '@mui/material/Typography';
 import List  from '@mui/material/List';
-import  ListItem  from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import  Collapse  from '@mui/material/Collapse';
-import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import  Accordion  from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-// import { keyframes } from '@mui/system'
 import Logo from '../logo/Logo.jsx';
 
 
 function ShopNavMobile(props) {
     const [shopMenuOpen,setShopMenuOpen]=useState(false)
     const [rotate, setRotate]=useState(false)
-    const [openDepartment,setOpenDepartment]=useState(false)
     const [expanded,setExpanded]=useState(false)
     const {menuButtonOnClick,menuButton,closeButton}=shopNavMobileStyle
      

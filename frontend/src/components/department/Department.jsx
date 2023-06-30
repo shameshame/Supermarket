@@ -5,7 +5,6 @@ import departmentStyle from "./department.style";
 import Button from "@mui/material/Button"
 import  Box  from "@mui/system/Box";
 import { useNavigate } from "react-router-dom";
-import ShopCounter from "../shopCounter/ShopCounter.jsx"
 import {useState} from "react"
 
 

@@ -17,12 +17,6 @@ function ProfileMenuItem(props) {
         }
     }  
     
-
-    function getPath(label){
-       return label==="Home" || label==="Log Out" ?"/":`/${label.toLowerCase()}`
-    }
-
-    
     return (<MenuItem  component={Link} to={`${labelLinkMap[label]}`} onClick={()=>handleLogout(label)}>
                 <TheIcon/>
                 {label}

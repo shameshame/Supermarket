@@ -1,5 +1,3 @@
-import Paper from '@mui/material/Paper';
-import Input from '@mui/material/Input';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import productStyle from "./product.style"

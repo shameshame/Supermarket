@@ -7,7 +7,7 @@ const cors=require("cors")
 const PORT=process.env.PORT || 5000
 const {requestMethod} = require("./middleware/requestMethod")
 
-// connectDB()
+
 
 const app=express()
 

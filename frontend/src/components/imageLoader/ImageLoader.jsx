@@ -1,7 +1,6 @@
 import {useState} from "react"
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import imageLoaderStyle from "./imageLoader.style"
 import useMediaQuery from '@mui/material/useMediaQuery';
