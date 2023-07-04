@@ -5,7 +5,7 @@ import {BASE} from "../../config/globalVars"
 export const productApi = createApi({
     reducerPath:"productApi",
     baseQuery : fetchBaseQuery({
-        baseUrl:`${BASE}/api/inventory`
+        baseUrl: process.env.NODE_ENV==="development" ?`${BASE}/api/inventory` : `/api/inventory`
     }),
 
     endpoints: (builder) => ({

@@ -4,7 +4,7 @@ import {BASE} from "../../config/globalVars"
 export const cartApi = createApi({ 
     reducerPath : "cartApi",
     baseQuery:fetchBaseQuery({
-      baseUrl:`${BASE}/api/orders`
+      baseUrl: process.env.NODE_ENV==="development" ? `${BASE}/api/orders` : `/api/orders`
     }),
 
     endpoints: (builder) => ({

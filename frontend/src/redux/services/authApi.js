@@ -8,7 +8,7 @@ import {BASE} from "../../config/globalVars"
 export const authApi = createApi({
     reducerPath : "authApi",
     baseQuery:fetchBaseQuery({
-      baseUrl:`${BASE}/api/users`
+      baseUrl: process.env.NODE_ENV==="development" ? `${BASE}/api/users` : `/api/users`
     }),
     
      tagTypes: ['User'],
